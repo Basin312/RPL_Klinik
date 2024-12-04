@@ -16,7 +16,10 @@ public class Pasien {
     private String rePassword;
     @NotNull
     private String tanggalLahir;
+    @NotNull
     private String nomorTlp;
+    @NotNull
     private String alamat;
+    
     private String jenis;
 }
