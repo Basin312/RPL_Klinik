@@ -1,0 +1,162 @@
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.bg_image{
+    height: 100vh;
+    background-image: url("../../image/image.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.bg_gradient{
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.container{
+    height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    color: white;
+    font-size: 1.5em;
+    background-color: rgba(0, 0, 128, 0.7);
+    border-radius: 0 0 10px 10px;
+}
+
+.home_logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.home_logo input[type="image"] {
+    width: 35px;
+    height: 35px;
+}
+
+.logout_icon input[type="image"] {
+    width: 30px;
+    height: 30px;
+}
+
+.text_antrian {
+    color: white;
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.no_antrian {
+    color: white;
+    text-align: center;
+    font-size: 5em;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+form input[type="text"] {
+    width: 60%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+table {
+    width: 70%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead {
+    background: #0056a4;
+    color: white;
+}
+
+thead th {
+    text-align: left;
+    padding: 10px 15px;
+    font-size: 1.2em;
+}
+
+tr {
+    border-bottom: 1px solid #ddd;
+}
+
+tbody{
+    background: #f9f9f9;
+    color: black;
+}
+
+td {
+    padding: 10px 15px;
+    font-size: 1em;
+}
+
+/* ----------------------------------------------------------------- 
+PAGINATION
+*/
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin:0;
+}
+
+ul.pagination-container {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    gap: 10px;
+}
+
+ul.pagination-container li {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+ul.pagination-container a {
+    display: block;
+    padding: 5px 10px;
+    background-color: #0056a4;
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+ul.pagination-container a:hover {
+    background-color: #003d7a;
+    color: #e0e0e0;
+}
+
+ul.pagination-container a.disabled {
+    pointer-events: none;
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+ul.pagination-container a[aria-label="Previous"], 
+ul.pagination-container a[aria-label="Next"] {
+    font-size: 1em;
+    font-weight: bold;
+}

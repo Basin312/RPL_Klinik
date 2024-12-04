@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/dokter/dokterIndex.css">
+</head>
+<body>
+    <div class="bg_image">
+        <div class="bg_gradient">
+            <div class="container">
+                <header>
+                    <span class="home_logo">
+                        <input type="image" src="../../static/image/Logo Klinik.png">
+                        Poliklinik Sehat Selalu
+                    </span>
+                    <span class="logout_icon">
+                        <input type="image" src="../../static/image/Icon Logout.png">
+                    </span>
+                </header>
+                
+                <div class="text_antrian">No. Antrian</div>
+                <div class="no_antrian" th:text="${nomorAntrian}">67</div>
+
+                <form method="get" th:action="@{/dokter/}">
+                    <input type="text" name="filter" th:value="${filter}" placeholder="Cari berdasarkan nama">
+                </form>
+
+                <div class="pagination">
+                    <nav th:if="${pageCount > 1}">
+                        <ul class="pagination-container">
+                            <!-- Previous Button -->
+                            <li>
+                                <a th:href="@{/dokter/(page=${currentPage} - 1, filter=${filter})}" aria-label="Previous" th:class="${currentPage}==1 ? 'disabled' : null">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                
+                            <!-- Page Numbers -->
+                            <li th:each="i : ${#numbers.sequence(1, pageCount)}">
+                                <a th:href="@{/dokter/(page=${i}, filter=${filter})}" th:text="${i}" th:class="${currentPage}==${i} ? 'disabled' : null"></a>
+                            </li>
+                
+                            <!-- Next Button -->
+                            <li>
+                                <a th:href="@{/dokter/(page=${currentPage} + 1, filter=${filter})}" aria-label="Next" th:class="${currentPage}==${pageCount} ? 'disabled' : null">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama Pasien</th>
+                            <th>No. Antrian</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="row : ${results}">
+                            <td th:text="${row.nama}">Test</td>
+                            <td th:text="${row.nomorAntrian}">Test</td>
+                            <td th:text="${row.status}">Test</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
