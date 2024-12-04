@@ -8,6 +8,7 @@ public class RegistrasiController {
     
     @GetMapping("/register")
     public String halamanRegister(){
-        return "index";
+        return "registerPasien";
     }
+    
 }
