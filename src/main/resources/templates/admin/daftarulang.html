@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome, Administrator</h1>
+
+
+        <div>Registrasi Ulang</div>
+        <div>
+            <input type="text" value="" placeholder="Cari">
+        </div>
+        <table>
+            <thead>
+                <th th:text="#{msgs.headers.nama}">Nama Pasien</th>
+                <th th:text="#{msgs.headers.status}">Status</th>
+            </thead>
+            <tbody>
+                <tr th:each="antrian : ${allAntrian}">
+                    <td th:text="${antrian.name}">Okie</td>
+                    <td th:text="${antrian.status}">Menunggu</td>
+                </tr>
+            </tbody>
+        </table>   
+</body>
+</html>
