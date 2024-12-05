@@ -1,11 +1,11 @@
 package Kelompok2_RPL.AplikasiKlinik;
 
+
 import java.util.Date;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
 
 @AllArgsConstructor
 @Data
@@ -29,4 +29,6 @@ public class Pasien {
     private String alamat;
     
     private String status;
+
+
 }
