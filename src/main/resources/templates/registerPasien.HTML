@@ -10,36 +10,43 @@
     <div class="container">
         <div id = "bg">
             <h1 id="poli1">Poliklinik Sehat Selalu</h1>
-                <form action="" class="form-container">
-                    <div class="grid-container">
-                        <div id="register1">
-                            <label>Nama Lengkap</label>
-                            <input type="text" placeholder="Masukan nama">
-                            <label>Email</label>
-                            <input type="email" placeholder="Masukan email">
-                            <label>Password</label>
-                            <input type="password" placeholder="Masukan password">
-                            <label>Re-password</label>
-                            <input type="password" placeholder="Ulang masukan password">
-                        </div>
-                    
-                        <div id="register2">
-                            <label>Tanggal Lahir</label>
-                            <input type="date" placeholder="Tanggal Lahir (DD/MM/YYYY)">
-                            <label>Nomor Telepon</label>
-                            <input type="text" placeholder="Masukan no telepon">
-                            <label>Alamat Lengkap</label>
-                            <input type="text" placeholder="Masukan alamat lengkap domisili">
-                            <label>Jenis Kelamin</label>
-                            <select id="gender">
-                                <option value="" disabled selected>Pilih Jenis Kelamin</option>
-                                <option value="lakilaki">Laki-Laki</option>
-                                <option value="perempuan">Perempuan</option>
-                            </select>
-                        </div>
+            <form action="register" class="form-container" method="post" th:object="${register}">
+                <div class="grid-container">
+                    <div id="register1">
+                        <label>Nama Lengkap</label>
+                        <input type="text" name="nama" placeholder="Masukan nama" th:field="*{nama}">
+                        <div th:if="${#fields.hasErrors('nama')}" th:errors="*{nama}"></div>
+                        <label>Email</label>
+                        <input type="email" name="email" placeholder="Masukan email" th:field="*{email}">
+                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Masukan password" th:field="*{password}">
+                        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                        <label>Re-password</label>
+                        <input type="password" name="rePassword" placeholder="Ulang masukan password" th:field="*{rePassword}">
+                        <div th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}"></div>
                     </div>
-                    <button id="signup">Sign Up</button>
-                </form>
+                    <div id="register2">
+                        <label>Tanggal Lahir</label>
+                        <input type="date" name="tanggalLahir" th:field="*{tanggalLahir}">
+                        <div th:if="${#fields.hasErrors('tanggalLahir')}" th:errors="*{tanggalLahir}"></div>
+                        <label>Nomor Telepon</label>
+                        <input type="text" name="nomorTlp" placeholder="Masukan no telepon" th:field="*{nomorTlp}">
+                        <div th:if="${#fields.hasErrors('nomorTlp')}" th:errors="*{nomorTlp}"></div>
+                        <label>Alamat Lengkap</label>
+                        <input type="text" name="alamat" placeholder="Masukan alamat lengkap domisili" th:field="*{alamat}">
+                        <div th:if="${#fields.hasErrors('alamat')}" th:errors="*{alamat}"></div>
+                        <label>Jenis Kelamin</label>
+                        <select id="gender" th:field="*{jenis}">
+                            <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                            <option value="lakilaki">Laki-Laki</option>
+                            <option value="perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="signup" type="submit">Sign Up</button>
+            </form>
+            
         
         <p class="signin-text">
             Sudah memiliki akun? <a href="#">Sign In</a>
