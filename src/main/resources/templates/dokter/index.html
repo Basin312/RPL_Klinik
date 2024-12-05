@@ -26,57 +26,27 @@
                 <form method="get" th:action="@{/dokter/}">
                     <input type="text" name="filter" th:value="${filter}" placeholder="Cari berdasarkan nama">
                 </form>
-
-                <div class="pagination">
-                    <nav th:if="${pageCount > 1}">
-                        <ul class="pagination-container">
-                            <!-- Previous Button -->
-                            <li>
-                                <a th:href="@{/dokter/(page=${currentPage} - 1, filter=${filter})}" aria-label="Previous" th:class="${currentPage}==1 ? 'disabled' : null">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
                 
-                            <!-- Page Numbers -->
-                            <li th:each="i : ${#numbers.sequence(1, pageCount)}">
-                                <a th:href="@{/dokter/(page=${i}, filter=${filter})}" th:text="${i}" th:class="${currentPage}==${i} ? 'disabled' : null"></a>
-                            </li>
-                
-                            <!-- Next Button -->
-                            <li>
-                                <a th:href="@{/dokter/(page=${currentPage} + 1, filter=${filter})}" aria-label="Next" th:class="${currentPage}==${pageCount} ? 'disabled' : null">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="table_container">
+                    <div class="table_wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nama Pasien</th>
+                                    <th>No. Antrian</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="row : ${results}">
+                                    <td th:text="${row.nama}">Test</td>
+                                    <td th:text="${row.nomorAntrian}">Test</td>
+                                    <td th:text="${row.status}">Test</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nama Pasien</th>
-                            <th>No. Antrian</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr th:each="row : ${results}">
-                            <td th:text="${row.nama}">Test</td>
-                            <td th:text="${row.nomorAntrian}">Test</td>
-                            <td th:text="${row.status}">Test</td>
-                        </tr>
-
-                        <tr><td>1</td></tr>
-                        <tr><td>1</td></tr>
-                        <tr><td>1</td></tr>
-                        <tr><td>1</td></tr>
-                        <tr><td>1</td></tr>
-                        <tr><td>1</td></tr>
-                        <tr><td>1</td></tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

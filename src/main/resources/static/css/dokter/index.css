@@ -17,6 +17,7 @@ body{
 
 .container{
     height: 100vh;
+    overflow: hidden;
 }
 
 header {
@@ -76,7 +77,7 @@ form input[type="text"] {
 }
 
 table {
-    width: 70%;
+    width: 100%;
     margin: 0 auto;
     border-collapse: collapse;
     background: white;
@@ -90,9 +91,11 @@ thead {
 }
 
 thead th {
-    text-align: left;
-    padding: 10px 15px;
-    font-size: 1.2em;
+    position: sticky; 
+    top: 0;
+    background: #0056a4;
+    color: white;
+    z-index: 1;
 }
 
 tr {
@@ -109,53 +112,20 @@ td {
     font-size: 1em;
 }
 
-/* ----------------------------------------------------------------- 
-PAGINATION
-*/
-
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin:0;
+.table_wrapper {
+    width: 80%; 
+    max-height: 50vh; 
+    margin: 20px 0;
+    overflow-y: auto; 
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    background: white; 
 }
 
-ul.pagination-container {
+.table_container{
     display: flex;
-    list-style-type: none;
-    padding: 0;
-    gap: 10px;
-}
-
-ul.pagination-container li {
-    border-radius: 5px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     overflow: hidden;
-}
-
-ul.pagination-container a {
-    display: block;
-    padding: 5px 10px;
-    background-color: #0056a4;
-    color: white;
-    text-decoration: none;
-    font-size: 1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-ul.pagination-container a:hover {
-    background-color: #003d7a;
-    color: #e0e0e0;
-}
-
-ul.pagination-container a.disabled {
-    pointer-events: none;
-    background-color: #ccc;
-    color: #666;
-    cursor: not-allowed;
-}
-
-ul.pagination-container a[aria-label="Previous"], 
-ul.pagination-container a[aria-label="Next"] {
-    font-size: 1em;
-    font-weight: bold;
 }
