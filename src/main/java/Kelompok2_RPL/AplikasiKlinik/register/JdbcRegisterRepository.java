@@ -21,7 +21,7 @@ public class JdbcRegisterRepository implements RegisterRepository {
     @Override
     public void save(Pasien pasien) throws Exception {
         String sql = "INSERT INTO pasien (nama, email, password, tanggal_lahir, jenis_kelamin, no_hp, alamat) VALUES (?,?,?,?,?,?,?)";
-        jdbc.update(sql, pasien.getNama(), pasien.getEmail(), pasien.getPassword(), pasien.getTanggalLahir().toString(), pasien.getJenis(), pasien.getNomorTlp(), pasien.getAlamat());
+        jdbc.update(sql, pasien.getNama(), pasien.getEmail(), pasien.getPassword(), pasien.getTanggalLahir().toString(), pasien.getJenis(), pasien.getNoHp(), pasien.getAlamat());
     }
 
     public Pasien mapToPasien(ResultSet resultSet, int rowNum) throws SQLException{

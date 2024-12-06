@@ -25,7 +25,7 @@ public class Pasien {
     @NotNull
     private LocalDate tanggalLahir;
     @NotNull
-    private String nomorTlp;
+    private String noHp;
     private String alamat;
     private String jenis;
 }
