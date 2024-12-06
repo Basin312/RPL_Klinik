@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Pasien {
     @NotNull
+    private Integer id_Pasien;
+    @NotNull
     private String nama;
     @NotNull
     private String email;
@@ -25,7 +27,8 @@ public class Pasien {
     @NotNull
     private LocalDate tanggalLahir;
     @NotNull
-    private String noHp;
+    private String no_Hp;
+    @NotNull
     private String alamat;
-    private String jenis;
+    private String jenis_kelamin;
 }

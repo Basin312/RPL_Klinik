@@ -31,13 +31,13 @@
                         <input type="date" name="tanggalLahir" th:field="*{tanggalLahir}">
                         <div th:if="${#fields.hasErrors('tanggalLahir')}" th:errors="*{tanggalLahir}"></div>
                         <label>Nomor Telepon</label>
-                        <input type="text" name="noHp" placeholder="Masukan no telepon" th:field="*{noHp}">
-                        <div th:if="${#fields.hasErrors('noHp')}" th:errors="*{noHp}"></div>
+                        <input type="text" name="no_Hp" placeholder="Masukan no telepon" th:field="*{no_Hp}">
+                        <div th:if="${#fields.hasErrors('no_Hp')}" th:errors="*{no_Hp}"></div>
                         <label>Alamat Lengkap</label>
                         <input type="text" name="alamat" placeholder="Masukan alamat lengkap domisili" th:field="*{alamat}">
                         <div th:if="${#fields.hasErrors('alamat')}" th:errors="*{alamat}"></div>
                         <label>Jenis Kelamin</label>
-                        <select id="gender" th:field="*{jenis}">
+                        <select id="gender" th:field="*{jenis_kelamin}">
                             <option value="" disabled selected>Pilih Jenis Kelamin</option>
                             <option value="lakilaki">Laki-Laki</option>
                             <option value="perempuan">Perempuan</option>
