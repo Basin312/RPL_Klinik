@@ -1,17 +1,19 @@
 package Kelompok2_RPL.AplikasiKlinik;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Data
+@NoArgsConstructor
 public class Pasien {
     @NotNull
-    private int id_Pasien;
+    private Integer id_Pasien;
     @NotNull
     private String nama;
     @NotNull
@@ -19,16 +21,13 @@ public class Pasien {
     @NotNull
     @Size(min=4, max=60)
     private String password;
+    @Size(min=4, max=60)
+    private String RePassword;
     @NotNull
-    private Date tanggalLahir;
+    private LocalDate tanggalLahir;
     @NotNull
-    private String jenis_kelamin;
-    @NotNull
-    private String no_hp;
+    private String no_Hp;
     @NotNull
     private String alamat;
-    
-    private String status;
-
-
+    private String jenis_kelamin;
 }
