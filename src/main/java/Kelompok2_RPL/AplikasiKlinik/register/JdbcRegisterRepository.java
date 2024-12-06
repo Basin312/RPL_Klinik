@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import Kelompok2_RPL.AplikasiKlinik.Pasien;
-
 @Repository
 public class JdbcRegisterRepository implements RegisterRepository {
 
@@ -19,13 +17,13 @@ public class JdbcRegisterRepository implements RegisterRepository {
     private JdbcTemplate jdbc;
 
     @Override
-    public void save(Pasien pasien) throws Exception {
+    public void save(Register pasien) throws Exception {
         String sql = "INSERT INTO pasien (nama, email, password, tanggal_lahir, jenis_kelamin, no_hp, alamat) VALUES (?,?,?,?,?,?,?)";
         jdbc.update(sql, pasien.getNama(), pasien.getEmail(), pasien.getPassword(), pasien.getTanggalLahir().toString(), pasien.getJenis_kelamin(), pasien.getNo_Hp(), pasien.getAlamat());
     }
 
-    public Pasien mapToPasien(ResultSet resultSet, int rowNum) throws SQLException{
-        return new Pasien(
+    public Register mapToPasien(ResultSet resultSet, int rowNum) throws SQLException{
+        return new Register(
             resultSet.getInt("id_Pasien"),
             resultSet.getString("nama"),
             resultSet.getString("email"),
@@ -39,9 +37,9 @@ public class JdbcRegisterRepository implements RegisterRepository {
     }
 
     @Override
-    public Optional<Pasien> findByEmail(String email) {
+    public Optional<Register> findByEmail(String email) {
         String sql ="SELECT * FROM pasien WHERE email = ? ";
-        List<Pasien> result = jdbc.query(sql, this::mapToPasien, email);
+        List<Register> result = jdbc.query(sql, this::mapToPasien, email);
         return result.size() == 0 ? Optional.empty() : Optional.of(result.get(0));
     }
     
