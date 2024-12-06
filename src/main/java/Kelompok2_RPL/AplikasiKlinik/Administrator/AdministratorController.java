@@ -1,7 +1,6 @@
 package Kelompok2_RPL.AplikasiKlinik.Administrator;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller

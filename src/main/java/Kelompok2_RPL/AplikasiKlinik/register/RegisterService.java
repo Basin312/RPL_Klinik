@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import Kelompok2_RPL.AplikasiKlinik.Pasien;
-
 @Service
 public class RegisterService {
     @Autowired
@@ -16,10 +14,10 @@ public class RegisterService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public boolean register(Pasien register ){
+    public boolean register(Register register ){
         try{
 
-            Optional<Pasien> existingPasien =registerRepository.findByEmail(register.getEmail());
+            Optional<Register> existingPasien =registerRepository.findByEmail(register.getEmail());
             if(existingPasien.isPresent()){
                 System.out.println("Email already exists: " + register.getEmail());
                 return false;

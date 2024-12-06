@@ -20,7 +20,7 @@ public class RegistrasiController {
     }
     
     @PostMapping("/register")
-    public String registerData(@Valid Pasien register, BindingResult bindingResult){
+    public String registerData(@Valid Register register, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             return "registerPasien";
