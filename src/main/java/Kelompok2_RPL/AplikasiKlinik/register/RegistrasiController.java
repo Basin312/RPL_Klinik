@@ -1,4 +1,4 @@
-package Kelompok2_RPL.AplikasiKlinik;
+package Kelompok2_RPL.AplikasiKlinik.register;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import Kelompok2_RPL.AplikasiKlinik.Pasien;
 import jakarta.validation.Valid;
 
 @Controller
@@ -14,12 +15,12 @@ public class RegistrasiController {
     private RegisterService registerService;
 
     @GetMapping("/register")
-    public String halamanRegister(Register register){
+    public String halamanRegister(Pasien register){
         return "registerPasien";
     }
     
     @PostMapping("/register")
-    public String registerData(@Valid Register register, BindingResult bindingResult){
+    public String registerData(@Valid Pasien register, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             return "registerPasien";
