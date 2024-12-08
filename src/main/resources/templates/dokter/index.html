@@ -29,19 +29,23 @@
                 
                 <div class="table_container">
                     <div class="table_wrapper">
-                        <table>
+                        <table id="list_antrian">
                             <thead>
                                 <tr>
                                     <th>Nama Pasien</th>
                                     <th>No. Antrian</th>
                                     <th>Status</th>
+                                    <th>Button</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="row : ${results}">
-                                    <td th:text="${row.nama}">Test</td>
-                                    <td th:text="${row.nomorAntrian}">Test</td>
-                                    <td th:text="${row.status}">Test</td>
+                                <tr th:each="row : ${listAntrian}">
+                                    <td th:text="${row.nama}">Okie Hafam</td>
+                                    <td th:text="${row.nomorAntrian}">67</td>
+                                    <td th:text="${row.status}">Menunggu</td>
+                                    <td>
+                                        <button class="konsul_button" disabled>Konsultasi</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -50,5 +54,20 @@
             </div>
         </div>
     </div>
+
+    <script defer>
+        (function (){
+            var buttons = document.getElementsByClassName("konsul_button")
+            
+            // Loop untuk menonaktifkan tombol di baris selain baris pertama
+            for (var i = 0; i < buttons.length; i++) {
+                if (i === 0) { // Jika baris bukan baris pertama
+                    buttons[i].disabled = false; // Nonaktifkan tombol
+                }else{
+                    buttons[i].disabled = true;
+                }
+            }
+        })();
+    </script>
 </body>
 </html>
