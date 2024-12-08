@@ -1,0 +1,140 @@
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 2fr 2fr;
+    grid-template-areas: 
+        "identitas_pasien identitas_pasien"
+        "history_check_up history_diagnosa"
+        "dok_pendukung history_obat";
+    row-gap: 15px;
+    column-gap: 15px;
+}
+
+/* ----------------------------------------------------------- */
+.identitas_pasien {
+    grid-area: identitas_pasien;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+.identitas_pasien .gambar_orang {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; 
+    border: 2px solid #ccc;
+    object-fit: cover;
+}
+
+.identitas_pasien .text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
+    font-size: 1em;
+}
+
+/* ----------------------------------------------------------- */
+
+.history_check_up{
+    grid-area: history_check_up;
+    gap: 15px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+.history_diagnosa{
+    grid-area: history_diagnosa;
+    height: 50vh;
+    gap: 15px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+.dok_pendukung{
+    grid-area: dok_pendukung;
+    gap: 15px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+.history_obat{
+    grid-area: history_obat;
+    gap: 15px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+/* ----------------------------------------------------------- */
+
+table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead {
+    background: #0056a4;
+    color: white;
+}
+
+thead th {
+    position: sticky; 
+    top: 0;
+    background: #0056a4;
+    color: white;
+    z-index: 1;
+}
+
+tr {
+    border-bottom: 1px solid #ddd;
+}
+
+tbody{
+    background: #f9f9f9;
+    color: black;
+}
+
+td {
+    padding: 10px 15px;
+    font-size: 1em;
+    text-align: center;
+}
+
+.table_wrapper {
+    width: 80%; 
+    max-height: 50vh; 
+    margin: 20px 0;
+    overflow-y: auto; 
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    background: white; 
+}
+
+.table_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+}

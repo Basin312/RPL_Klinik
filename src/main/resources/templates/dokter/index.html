@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/dokter/index.css">
+</head>
+<body>
+    <div class="bg_image">
+        <div class="bg_gradient">
+            <div class="container">
+                <header>
+                    <span class="home_logo">
+                        <input type="image" src="../../static/image/Logo Klinik.png">
+                        Poliklinik Sehat Selalu
+                    </span>
+                    <span class="logout_icon">
+                        <input type="image" src="../../static/image/Icon Logout.png">
+                    </span>
+                </header>
+                
+                <div class="text_antrian">No. Antrian</div>
+                <div class="no_antrian" th:text="${nomorAntrian}">67</div>
+
+                <form method="get" th:action="@{/dokter/}">
+                    <input type="text" name="filter" th:value="${filter}" placeholder="Cari berdasarkan nama">
+                </form>
+                
+                <div class="table_container">
+                    <div class="table_wrapper">
+                        <table id="list_antrian">
+                            <thead>
+                                <tr>
+                                    <th>Nama Pasien</th>
+                                    <th>No. Antrian</th>
+                                    <th>Status</th>
+                                    <th>Button</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="row : ${listAntrian}">
+                                    <td th:text="${row.nama}">Okie Hafam</td>
+                                    <td th:text="${row.nomorAntrian}">67</td>
+                                    <td th:text="${row.status}">Menunggu</td>
+                                    <td>
+                                        <button class="konsul_button" disabled>Konsultasi</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script defer>
+        (function (){
+            var buttons = document.getElementsByClassName("konsul_button")
+            
+            // Loop untuk menonaktifkan tombol di baris selain baris pertama
+            for (var i = 0; i < buttons.length; i++) {
+                if (i === 0) { // Jika baris bukan baris pertama
+                    buttons[i].disabled = false; // Nonaktifkan tombol
+                }else{
+                    buttons[i].disabled = true;
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

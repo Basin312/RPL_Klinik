@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/css/dokter/konsultasi.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="home_logo">
+                <input type="image" src="../../static/image/Logo Klinik.png">
+                Poliklinik Sehat Selalu
+            </span>
+            <span class="logout_icon">
+                <input type="image" src="../../static/image/Icon Logout.png">
+            </span>
+        </header>
+
+        <div class="grid_container">
+            <div class="identitas_pasien">
+                <img class="gambar_orang" src="../../static/image/Icon Orang.png" alt="Foto Pasien">
+                <div class="text">
+                    <div class="nama_pasien">Nama: <span>Okie Hafam</span></div>
+                    <div class="umur_pasien">Umur: <span>35</span></div>
+                    <div class="gender_pasien">Jenis Kelamin: <span>Pria</span></div>
+                    <div class="birth_pasien">Tanggal Lahir: <span>18 Oktober 2000</span></div>
+                </div>
+            </div>
+    
+            <div class="data_checkup">
+                <div class="item">
+                    <div class="label">Berat:</div>
+                    <div class="value">65</div>
+                </div>
+                <div class="item">
+                    <div class="label">Tinggi:</div>
+                    <div class="value">170</div>
+                </div>
+                <div class="item">
+                    <div class="label">Tekanan Darah:</div>
+                    <div class="value">120 / 80</div>
+                </div>
+            </div>
+    
+            <div class="box_diagnosa">
+                Diagnosa: <input type="text" name="diagnosa" placeholder="Masukan diagnosa">
+            </div>
+    
+            <div class="box_resep_obat">
+                <form method="post" action="/doker/konsultasi">
+                    <div class="inner_resep_obat">
+                        Nama Obat: <input type="text" name="namaObat" placeholder="Masukan nama obat">
+                        Dosis Obat: <input type="text" name="dosisObat" placeholder="Masukan dosis">
+                        <input type="submit" value="Tambah Obat">
+                    </div>
+                </form>
+            </div>
+    
+            <div class="button_rekam_medis">
+                <button type="button">Lihat Rekam Medis</button>
+            </div>
+    
+            <div class="button_simpan">
+                <button type="submit">Simpan</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

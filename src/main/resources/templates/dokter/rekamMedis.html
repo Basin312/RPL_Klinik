@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/dokter/rekamMedis.css">
+</head>
+<body>
+    <div class="container">
+        <div class="identitas_pasien">
+            <img class="gambar_orang" src="../../static/image/Icon Orang.png" alt="Foto Pasien">
+            <div class="text">
+                <div class="nama_pasien">Nama: <span>Okie Hafam</span></div>
+                <div class="umur_pasien">Umur: <span>35</span></div>
+                <div class="gender_pasien">Jenis Kelamin: <span>Pria</span></div>
+                <div class="birth_pasien">Tanggal Lahir: <span>18 Oktober 2000</span></div>
+            </div>
+        </div>
+
+        <div class="history_check_up">
+            <div class="table_container">
+                <div class="table_wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Berat Badan</th>
+                                <th>Tinggi Badan</th>
+                                <th>Tekanan Darah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="row : ${listCheckUp}">
+                                <td th:text="${row.tanggalCheckUp}">12052024</td>
+                                <td th:text="${row.beratBadan}">Okie Hafam</td>
+                                <td th:text="${row.tinggiBadan}">67</td>
+                                <td th:text="${row.tekananDarah}">Menunggu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="history_diagnosa">
+            <div class="table_container">
+                <div class="table_wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Diagnosa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="row : ${listDiagnosa}">
+                                <td th:text="${row.tanggalDiagnosa}">12052024</td>
+                                <td th:text="${row.diagnosa}">Sakit perut</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="dok_pendukung">
+            <div class="table_container">
+                <div class="table_wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Nama Dokumen</th>
+                                <th>File Dokumen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="row : ${listDokumen}">
+                                <td th:text="${row.tanggalDokumen}">12052024</td>
+                                <td th:text="${row.namaDokumen}">Ronsen Patah Kaki</td>
+                                <td>
+                                    <button>Lihat</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="history_obat">
+            <div class="table_container">
+                <div class="table_wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Nama Obat</th>
+                                <th>Dosis Obat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="row : ${listObat}">
+                                <td th:text="${row.tanggalObat}">12052024</td>
+                                <td th:text="${row.namaObat}">Obat batuk</td>
+                                <td th:text="${row.dosisObat}">Sehari 3 kali</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
