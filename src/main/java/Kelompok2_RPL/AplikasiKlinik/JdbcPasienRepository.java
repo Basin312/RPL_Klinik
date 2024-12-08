@@ -22,8 +22,33 @@ public class JdbcPasienRepository {
         WHERE pd.tanggal_pendaftaran = CURRENT_DATE
     """;
 
+    private final String SELECT_BY_ID_QUERY =
+    """
+        SELECT p.id_Pasien, p.nama, p.email, p.password, p.tanggal_lahir, p.jenis_kelamin, p.no_hp, p.alamat, pd.is_Daftar
+        FROM Pasien p
+        JOIN Pendaftaran pd ON p.id_Pasien = pd.id_Pasien
+        WHERE p.id_Pasien = ?
+        ORDER BY pd.tanggal_pendaftaran DESC
+        LIMIT 1
+    """;
+
+    private final String UPDATE_STATUS_QUERY =
+    """
+        UPDATE Pendaftaran
+        SET is_Daftar = ?
+        WHERE id_Pasien = ?
+    """;
+
     public List<Pasien> findAllWithStatus() {
         return jdbcTemplate.query(SELECT_JOIN_QUERY, this::mapRowToPasien);
+    }
+
+    public Pasien findById(int id) {
+        return jdbcTemplate.queryForObject(SELECT_BY_ID_QUERY, this::mapRowToPasien, id);
+    }
+
+    public void updateStatus(int id, boolean isDaftar) {
+        jdbcTemplate.update(UPDATE_STATUS_QUERY, isDaftar, id);
     }
 
     private Pasien mapRowToPasien(ResultSet resultSet, int rowNum) throws SQLException {

@@ -14,4 +14,12 @@ public class PasienService {
     public List<Pasien> getAllPasienWithStatus() {
         return pasienRepository.findAllWithStatus();
     }
+
+    public Pasien getPasienById(int id) {
+        return pasienRepository.findById(id);
+    }
+
+    public void updatePasienStatus(int id, boolean isDaftar) {
+        pasienRepository.updateStatus(id, isDaftar);
+    }
 }

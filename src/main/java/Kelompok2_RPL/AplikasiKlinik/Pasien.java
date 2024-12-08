@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-
 @AllArgsConstructor
 @Data
 public class Pasien {
@@ -14,8 +13,7 @@ public class Pasien {
     private int id_Pasien;
     @NotNull
     private String nama;
-    @NotNull
-    private String email;
+    @NotNull String email;
     @NotNull
     @Size(min=4, max=60)
     private String password;
