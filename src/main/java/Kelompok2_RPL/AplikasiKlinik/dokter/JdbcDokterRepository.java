@@ -21,12 +21,27 @@ public class JdbcDokterRepository implements DokterRepository {
         SELECT *
         FROM Pendaftaran pd
         JOIN Pasien p ON pd.id_Pasien = p.id_Pasien
-        JOIN Jadwal j ON pd.id_jadwal = j.id_jadwal
+        JOIN Jadwal j ON pd.id_Jadwal = j.id_Jadwal
         WHERE pd.tanggal_pendaftaran = CURRENT_DATE AND pd.is_Daftar = TRUE AND j.id_Dokter = ?
         """;
         
         List<PendaftaranKonsultasi> list = jdbcTemplate.query(sql, this::MapRowToPendaftaranKonsultasi, id_Dokter);
+        return list;
+    }
 
+    public List<PendaftaranKonsultasi> searchPendaftaranByName(int id_Dokter, String filter){
+        String sql = 
+        """
+        SELECT *
+        FROM Pendaftaran pd
+        JOIN Pasien p ON pd.id_Pasien = p.id_Pasien
+        JOIN Jadwal j ON pd.id_Jadwal = j.id_Jadwal
+        WHERE pd.tanggal_pendaftaran = CURRENT_DATE AND pd.is_Daftar = TRUE AND j.id_Dokter = ? AND p.nama = ?
+        """;
+
+        String keyword = "%" + filter + "%";
+
+        List<PendaftaranKonsultasi> list = jdbcTemplate.query(sql, this::MapRowToPendaftaranKonsultasi, id_Dokter, keyword);
         return list;
     }
 

@@ -31,6 +31,15 @@ public class DokterController {
             }else{
                 model.addAttribute("nomorAntrian", listAntrian.get(0).getNomorAntrian());
             }
+        }else{
+            List<PendaftaranKonsultasi> listAntrian = this.dokterService.searchPendaftaranByName((int) session.getAttribute("id_Dokter"), filter);
+            model.addAttribute("listAntrian", listAntrian);
+            model.addAttribute("filter", filter);
+            if(listAntrian.size() == 0){
+                model.addAttribute("nomorAntrian", null);
+            }else{
+                model.addAttribute("nomorAntrian", listAntrian.get(0).getNomorAntrian());
+            }
         }
         return "/dokter/index";
     }

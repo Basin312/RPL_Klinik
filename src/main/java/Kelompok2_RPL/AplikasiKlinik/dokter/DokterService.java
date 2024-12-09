@@ -15,4 +15,8 @@ public class DokterService {
     public List<PendaftaranKonsultasi> getAllPendaftaran(int id_Dokter){
         return this.dokterRepository.getAllPendaftaran(id_Dokter);
     }
+
+    public List<PendaftaranKonsultasi> searchPendaftaranByName(int id_Dokter, String filter){
+        return this.dokterRepository.searchPendaftaranByName(id_Dokter, filter);
+    }
 }
