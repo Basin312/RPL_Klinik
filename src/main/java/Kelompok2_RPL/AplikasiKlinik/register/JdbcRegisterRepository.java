@@ -23,8 +23,7 @@ public class JdbcRegisterRepository implements RegisterRepository {
     }
 
     public Register mapToPasien(ResultSet resultSet, int rowNum) throws SQLException{
-        return new Register(
-            resultSet.getInt("id_Pasien"),
+                       return new Register(
             resultSet.getString("nama"),
             resultSet.getString("email"),
             resultSet.getString("password"),

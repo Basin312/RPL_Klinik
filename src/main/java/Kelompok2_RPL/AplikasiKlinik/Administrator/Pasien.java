@@ -1,4 +1,4 @@
-package Kelompok2_RPL.AplikasiKlinik;
+package Kelompok2_RPL.AplikasiKlinik.Administrator;
 
 import java.util.Date;
 import jakarta.validation.constraints.NotNull;
