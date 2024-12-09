@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/dokter/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/dokter/index.css">
 </head>
 <body>
     <div class="bg_image">
@@ -12,15 +12,15 @@
             <div class="container">
                 <header>
                     <span class="home_logo">
-                        <input type="image" src="../../static/image/Logo Klinik.png">
+                        <input type="image" src="/image/Logo Klinik.png">
                         Poliklinik Sehat Selalu
                     </span>
                     <span class="logout_icon">
-                        <input type="image" src="../../static/image/Icon Logout.png">
+                        <input type="image" src="/image/Icon Logout.png">
                     </span>
                 </header>
                 
-                <div class="text_antrian">No. Antrian</div>
+                <div class="text_antrian" th:text="${nomorAntrian != null ? 'No. Antrian' : 'Belum Memiliki Antrian'}">No. Antrian</div>
                 <div class="no_antrian" th:text="${nomorAntrian}">67</div>
 
                 <form method="get" th:action="@{/dokter/}">
@@ -35,14 +35,14 @@
                                     <th>Nama Pasien</th>
                                     <th>No. Antrian</th>
                                     <th>Status</th>
-                                    <th>Button</th>
+                                    <th>Konsultasi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="row : ${listAntrian}">
                                     <td th:text="${row.nama}">Okie Hafam</td>
                                     <td th:text="${row.nomorAntrian}">67</td>
-                                    <td th:text="${row.status}">Menunggu</td>
+                                    <td th:text="${row.is_Daftar}">Menunggu</td>
                                     <td>
                                         <button class="konsul_button" disabled>Konsultasi</button>
                                     </td>
