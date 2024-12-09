@@ -20,7 +20,7 @@
                     </span>
                 </header>
                 
-                <div class="text_antrian">No. Antrian</div>
+                <div class="text_antrian" th:text="${nomorAntrian != null ? 'No. Antrian' : 'Belum Memiliki Antrian'}">No. Antrian</div>
                 <div class="no_antrian" th:text="${nomorAntrian}">67</div>
 
                 <form method="get" th:action="@{/dokter/}">
@@ -35,14 +35,14 @@
                                     <th>Nama Pasien</th>
                                     <th>No. Antrian</th>
                                     <th>Status</th>
-                                    <th>Button</th>
+                                    <th>Konsultasi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="row : ${listAntrian}">
                                     <td th:text="${row.nama}">Okie Hafam</td>
                                     <td th:text="${row.nomorAntrian}">67</td>
-                                    <td th:text="${row.status}">Menunggu</td>
+                                    <td th:text="${row.is_Daftar}">Menunggu</td>
                                     <td>
                                         <button class="konsul_button" disabled>Konsultasi</button>
                                     </td>

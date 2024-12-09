@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import Kelompok2_RPL.AplikasiKlinik.pendaftaran.Pendaftaran;
+import Kelompok2_RPL.AplikasiKlinik.pendaftaran.PendaftaranKonsultasi;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -24,9 +24,13 @@ public class DokterController {
     @GetMapping("/home")
     public String getIndex(Model model, @RequestParam(name = "filter", required = false) String filter){
         if(filter == null){ //ga pake filter
-            List<Pendaftaran> listAntrian = this.dokterService.getAllPendaftaran((int) session.getAttribute("id_Dokter"));
+            List<PendaftaranKonsultasi> listAntrian = this.dokterService.getAllPendaftaran((int) session.getAttribute("id_Dokter"));
             model.addAttribute("listAntrian", listAntrian);
-            model.addAttribute("nomorAntrian", listAntrian.get(0).getNomor_antrian());
+            if(listAntrian.size() == 0){
+                model.addAttribute("nomorAntrian", null);
+            }else{
+                model.addAttribute("nomorAntrian", listAntrian.get(0).getNomorAntrian());
+            }
         }
         return "/dokter/index";
     }

@@ -2,8 +2,8 @@ package Kelompok2_RPL.AplikasiKlinik.dokter;
 
 import java.util.List;
 
-import Kelompok2_RPL.AplikasiKlinik.pendaftaran.Pendaftaran;
+import Kelompok2_RPL.AplikasiKlinik.pendaftaran.PendaftaranKonsultasi;
 
 public interface DokterRepository {
-    List<Pendaftaran> getAllPendaftaran(int id_Dokter);
+    List<PendaftaranKonsultasi> getAllPendaftaran(int id_Dokter);
 }
