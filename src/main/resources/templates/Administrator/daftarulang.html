@@ -47,11 +47,9 @@
                     </thead>
                     <tbody>
                         <!-- Looping data pasien menggunakan Thymeleaf -->
-                        <tr th:each="pasien : ${pasienList}">
-                            <td>
-                                <!-- Link ke halaman detail pasien -->
-                                <a th:href="@{'/administrator/detailPasien?id=' + ${pasien.id_Pasien}}" th:text="${pasien.nama}"></a>
-                            </td>
+                        <tr th:each="pasien : ${pasienList}"
+                            th:onclick="|window.location.href='/administrator/detailPasien?id=' + ${pasien.idPasien}|">
+                            <td th:text="${pasien.nama}"></td>
                             <td th:text="${pasien.status}"></td>
                         </tr>
                     </tbody>

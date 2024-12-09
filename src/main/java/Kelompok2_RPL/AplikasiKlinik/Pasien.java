@@ -26,5 +26,5 @@ public class Pasien {
     @NotNull
     private String alamat;
     
-    private String status;
+    
 }
