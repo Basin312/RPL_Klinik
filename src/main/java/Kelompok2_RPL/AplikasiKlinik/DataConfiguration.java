@@ -22,9 +22,9 @@ public class DataConfiguration{
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/klinik");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("0930044762");
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
         return dataSource;
 
     }
