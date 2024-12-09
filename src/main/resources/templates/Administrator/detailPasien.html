@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pasien</title>
+    <link rel="stylesheet" href="/Administrator/css/detailPasien.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <a href="/administrator/home">
+                    <img src="/Administrator/image/klinik.jpg" alt="Logo" class="logo-image">
+                </a>
+            </div>
+            <div class="title">Poliklinik Sehat Selalu</div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <div class="welcome-message">
+                <h1>Welcome,<br>Administrator</h1>
+            </div>
+            <div class="separator"></div>
+
+            <!-- Form Detail Pasien -->
+            <div class="form-container">
+                <form action="/updateStatus" method="POST">
+                    <div class="form-group">
+                        <label for="nama">Nama:</label>
+                        <span id="nama" th:text="${pasien.nama}">Default Nama</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tanggalPendaftaran">Tanggal Pendaftaran:</label>
+                        <span id="tanggalPendaftaran" th:text="${pasien.tanggalPendaftaran != null ? #dates.format(pasien.tanggalPendaftaran, 'yyyy-MM-dd') : 'N/A'}">>Default Tanggal</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telp">No. Hp:</label>
+                        <span id="noHp" th:text="${pasien.noHp}">Default No Hp</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jenisKelamin">Jenis Kelamin:</label>
+                        <span id="jenisKelamin" th:text="${pasien.jenisKelamin}">Default Jenis Kelamin</span>
+                    </div>
+
+                    <!-- Tampilkan informasi tambahan: Dokter dan Jam Konsul -->
+                    <div class="form-group">
+                        <label for="dokter">Dokter:</label>
+                        <span id="namaDokter" th:text="${pasien.namaDokter}">Default Nama Dokter</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jamKonsul">Jam Konsul:</label>
+                        <span id="jamKonsul" th:text="${pasien.jamKonsul}">Default Jam Konsul</span>
+                    </div>
+                    
+                    <!-- Tombol untuk memperbarui status pasien -->
+                    <button type="submit" class="submit-button">Selesai</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
