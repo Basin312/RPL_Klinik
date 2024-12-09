@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/RolesLogin.css">
+</head>
+<body>
+    <div id="container">
+        <div id="bg">
+            <h1 id = judul>Poliklinik Sehat Selalu</H1>
+                <h2>LOGIN AS</h2>
+                <div id="formAction">
+                    <form action="loginPasien" method="post">
+                        <button type="submit" value="loginPasien" id="RolesPasien" >Pasien</button>
+                    </form>
+                    <form action="loginDokter" method="post">
+                        <Button type="submit" value="loginDokter" id="RolesDokter" class="buttonRole">Dokter</Button>
+                    </form>
+                    <form action="loginPerawat" method="post">
+                        <button type="submit" value="loginPerawat" id="RolesPerawat" class="buttonRole">perawat</button>
+                    </form>
+                    <form action="loginAdministrator" method="post">
+                        <button type="submit" value="loginAdministrator" id = "RolesAdministrator" class="buttonRole">Administrator</button>
+                    </form>
+                    <form action="loginAdmin" method="post">
+                        <Button type="submit" value="loginAdmin" id="RolesAdmin" class="buttonRole">Admin</Button>
+                    </form>
+                </div>
+        </div>
+    </div>
+</body>
+</html>
