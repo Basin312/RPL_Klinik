@@ -28,6 +28,9 @@
             <!-- Form Detail Pasien -->
             <div class="form-container">
                 <form action="/updateStatus" method="POST">
+                    <input type="hidden" name="id" th:value="${pasien.idPasien}">
+                    <input type="hidden" name="status" value="Selesai">
+                    
                     <div class="form-group">
                         <label for="nama">Nama:</label>
                         <span id="nama" th:text="${pasien.nama}">Default Nama</span>

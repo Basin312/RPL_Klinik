@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class DetailPasienDTO {
+    private int idPasien;
     private String nama;
     private Date tanggalPendaftaran;
     private String noHp;
