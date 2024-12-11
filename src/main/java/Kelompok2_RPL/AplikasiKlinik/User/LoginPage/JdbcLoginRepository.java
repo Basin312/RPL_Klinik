@@ -31,7 +31,7 @@ public class JdbcLoginRepository implements LoginRepository{
         return results.size() == 0 ? Optional.empty() : Optional.of(results.get(0));
     }
     public Optional<Login> findAdmin(String email) {
-        String sql = "SELECT * FROM Admin WHERE email = ?";
+        String sql = "SELECT * FROM SistemAdmin WHERE email = ?";
         List<Login> results = jdbcTemplates.query(sql, this::mapRowToAdmin, email);
         return results.size() == 0 ? Optional.empty() : Optional.of(results.get(0));
     }

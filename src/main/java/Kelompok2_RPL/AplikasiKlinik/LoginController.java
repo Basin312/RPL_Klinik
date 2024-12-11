@@ -89,7 +89,7 @@ public class LoginController {
             return "redirect:/loginAdmin";
         }
         session.setAttribute("Email", user);
-            return "redirect:/Admin";   //edit loc
+            return "redirect:/admin";   //edit loc
     }
 
     @GetMapping("/dashboard") //edit loc
