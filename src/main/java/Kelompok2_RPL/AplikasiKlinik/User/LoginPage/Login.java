@@ -20,9 +20,12 @@ public class Login {
 
     private String roles;
     
-    public Login(String email, String password){
+    private int id;
+
+    public Login(String email, String password, int id) {
         this.email = email;
         this.password = password;
+        this.id = id;
     }
 }
 
