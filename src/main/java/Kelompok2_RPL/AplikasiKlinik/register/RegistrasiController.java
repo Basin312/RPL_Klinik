@@ -6,7 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import Kelompok2_RPL.AplikasiKlinik.Pasien;
+import Kelompok2_RPL.AplikasiKlinik.pasien.Pasien;
 import jakarta.validation.Valid;
 
 @Controller
@@ -15,7 +15,7 @@ public class RegistrasiController {
     private RegisterService registerService;
 
     @GetMapping("/register")
-    public String halamanRegister(Pasien register){
+    public String halamanRegister(Register register){
         return "registerPasien";
     }
     
