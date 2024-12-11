@@ -19,11 +19,11 @@ public class LoginController {
     
     @GetMapping("/")
     public String roleslogin(){
-        return "MainPage";
+        return "/login/MainPage";
     }
     @GetMapping("/loginPasien")
     public String LoginPasien(){
-        return "loginPasien";
+        return "/login/loginPasien";
     }
 
     @PostMapping("/loginPasien")
@@ -38,7 +38,7 @@ public class LoginController {
 
     @GetMapping("/loginDokter")
     public String loginDokter(){
-        return "LoginDokter";
+        return "/login/LoginDokter";
     }
 
     @PostMapping("/loginDokter")
@@ -53,7 +53,7 @@ public class LoginController {
 
     @GetMapping("/loginPerawat")
     public String loginPerawat(){
-        return "LoginPerawat";
+        return "/login/LoginPerawat";
     }
     @PostMapping("/loginPerawat")
     public String loginPerawat(@RequestParam String Email, @RequestParam String password, HttpSession session){
@@ -66,7 +66,7 @@ public class LoginController {
     }
     @GetMapping("/loginAdministrator")
     public String loginAdministrator(){
-        return "LoginAdministrator";
+        return "/login/LoginAdministrator";
     }
     @PostMapping("/loginAdministrator")
     public String loginAdministrator(@RequestParam String Email, @RequestParam String password, HttpSession session){
@@ -80,7 +80,7 @@ public class LoginController {
 
     @GetMapping("/loginAdmin")
     public String loginAdmin(){
-        return "LoginAdmin";
+        return "/login/LoginAdmin";
     }
     @PostMapping("/loginAdmin")
     public String loginAdmin(@RequestParam String Email, @RequestParam String password, HttpSession session){
@@ -89,7 +89,7 @@ public class LoginController {
             return "redirect:/loginAdmin";
         }
         session.setAttribute("Email", user);
-            return "redirect:/dashboard";   //edit loc
+            return "redirect:/Admin";   //edit loc
     }
 
     @GetMapping("/dashboard") //edit loc
