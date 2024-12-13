@@ -9,61 +9,77 @@
 <body>
     <div class="container">
         <header>
-            <span class="home_logo">
-                <input type="image" src="/image/Logo Klinik.png">
-                Poliklinik Sehat Selalu
-            </span>
-            <span class="logout_icon">
-                <input type="image" src="/image/Icon Logout.png">
-            </span>
+            <a th:href="@{/dokter/home}">
+                <span class="home_logo">
+                    <input type="image" src="/image/Logo Klinik.png">
+                </span>
+            </a>
+            Poliklinik Sehat Selalu
+            <a th:href="@{/dokter/logout}">
+                <span class="logout_icon">
+                    <input type="image" src="/image/Icon Logout.png">
+                </span>
+            </a>
         </header>
 
         <div class="grid_container">
             <div class="identitas_pasien">
                 <img class="gambar_orang" src="/image/Icon Orang.png" alt="Foto Pasien">
                 <div class="text">
-                    <div class="nama_pasien">Nama: <span>Okie Hafam</span></div>
-                    <div class="umur_pasien">Umur: <span>35</span></div>
-                    <div class="gender_pasien">Jenis Kelamin: <span>Pria</span></div>
-                    <div class="birth_pasien">Tanggal Lahir: <span>18 Oktober 2000</span></div>
+                    <div class="nama_pasien">Nama: <span th:text="${nama}">Okie Hafam</span></div>
+                    <div class="umur_pasien">Umur: <span th:text="${umur}">35</span></div>
+                    <div class="gender_pasien">Jenis Kelamin: <span th:text="${jenis_kelamin}">Pria</span></div>
+                    <div class="birth_pasien">Tanggal Lahir: <span th:text="${tanggal_lahir}">18 Oktober 2000</span></div>
                 </div>
             </div>
     
             <div class="data_checkup">
                 <div class="item">
                     <div class="label">Berat:</div>
-                    <div class="value">65</div>
+                    <div class="value" th:text="${berat}">65</div>
                 </div>
                 <div class="item">
                     <div class="label">Tinggi:</div>
-                    <div class="value">170</div>
+                    <div class="value" th:text="${tinggi}">170</div>
                 </div>
                 <div class="item">
                     <div class="label">Tekanan Darah:</div>
-                    <div class="value">120 / 80</div>
+                    <div class="value" th:text="${tekanan_darah}">120 / 80</div>
                 </div>
             </div>
     
             <div class="box_diagnosa">
-                Diagnosa: <input type="text" name="diagnosa" placeholder="Masukan diagnosa">
+                <form th:action="@{/dokter/konsultasi/{id_Pasien}(id_Pasien=${id_Pasien}, form='diagnosa')}" method="post" th:object="${konsultasi}" id="form_diagnosa">
+                    <div class="inner_diagnosa">
+                        Diagnosa: <input type="text" name="diagnosa" placeholder="Masukan diagnosa" th:field="*{diagnosa}" required>
+                        <span th:if="${#fields.hasErrors('diagnosa')}" th:errors="*{diagnosa}"></span>
+                        <button type="submit" name="form" value="diagnosa">Masukan diagnosa</button>
+                    </div>
+                </form>
             </div>
     
             <div class="box_resep_obat">
-                <form method="post" action="/doker/konsultasi">
+                <form method="post" th:action="@{/dokter/konsultasi/{id_Pasien}(id_Pasien=${id_Pasien}, form='obat')}" th:object="${catatanObat}">
                     <div class="inner_resep_obat">
-                        Nama Obat: <input type="text" name="namaObat" placeholder="Masukan nama obat">
-                        Dosis Obat: <input type="text" name="dosisObat" placeholder="Masukan dosis">
-                        <input type="submit" value="Tambah Obat">
+                        Nama Obat: <input type="text" name="obat" placeholder="Masukan nama obat" th:field="*{obat}" required>
+                        <span th:if="${#fields.hasErrors('obat')}" th:errors="*{obat}"></span>
+                        Dosis Obat: <input type="text" name="dosis" placeholder="Masukan dosis" th:field="*{dosis}" required>
+                        <span th:if="${#fields.hasErrors('dosis')}" th:errors="*{dosis}"></span>
+                        <button type="submit" name="form" value="obat">Masukan obat</button>
                     </div>
                 </form>
             </div>
     
             <div class="button_rekam_medis">
-                <button type="button">Lihat Rekam Medis</button>
+                <a th:href="@{/dokter/rekamMedis/{id_Pasien}(id_Pasien=${id_Pasien})}">
+                    <button type="button">Lihat Rekam Medis</button>
+                </a>
             </div>
     
             <div class="button_simpan">
-                <button type="submit">Simpan</button>
+                <a th:href="@{/dokter/simpanKonsultasi}">
+                    <button type="button">Simpan</button>
+                </a>
             </div>
         </div>
     </div>

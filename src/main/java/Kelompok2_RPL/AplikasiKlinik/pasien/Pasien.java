@@ -18,7 +18,7 @@ public class Pasien {
     @Size(min=4, max=60)
     private String password;
     @NotNull
-    private Date tanggalLahir;
+    private Date tanggal_lahir;
     @NotNull
     private String jenis_kelamin;
     @NotNull
