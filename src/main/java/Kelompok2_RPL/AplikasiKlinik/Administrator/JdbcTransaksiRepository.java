@@ -106,10 +106,6 @@ public class JdbcTransaksiRepository implements TransaksiRepository{
     @Override
     public void updateTransaksi(int idPasien, boolean is_Bayar, String methodPembayaran) {
         Integer idPendaftaran = jdbcTemplate.queryForObject(SELECT_ID_PENDAFTARAN_BY_PASIEN, Integer.class, idPasien);
-        if (idPendaftaran == null) {
-            throw new IllegalArgumentException("id_Pendaftaran tidak ditemukan untuk id_Pasien: " + idPasien);
-        }
-
         jdbcTemplate.update(UPDATE_TRANSAKSI, is_Bayar, methodPembayaran, idPendaftaran);
     }
 
