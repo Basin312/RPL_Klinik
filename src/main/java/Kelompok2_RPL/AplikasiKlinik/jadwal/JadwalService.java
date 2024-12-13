@@ -22,4 +22,12 @@ public class JadwalService {
     public List<Specialis> getAllSpecialis() {
         return jadwalRepository.findAllSpecialis();
     }
+
+    public List<Jadwal> getJadwalBySpecialisId(int idSpecialis) {
+        return jadwalRepository.findBySpecialisId(idSpecialis);
+    }
+
+    public List<Jadwal> getJadwalByDokterId(int idDokter) {
+        return jadwalRepository.findByDokterId(idDokter);
+    }
 }

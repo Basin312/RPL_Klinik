@@ -18,4 +18,20 @@ public class JadwalController {
         model.addAttribute("specialisList", jadwalService.getAllSpecialis());
         return "/jadwal";
     }
+
+    @GetMapping("/jadwal/filterSpecialis")
+    public String filterBySpecialis(int idSpecialis, Model model) {
+        model.addAttribute("jadwalList", jadwalService.getJadwalBySpecialisId(idSpecialis));
+        model.addAttribute("dokterList", jadwalService.getAllDokter());
+        model.addAttribute("specialisList", jadwalService.getAllSpecialis());
+        return "/jadwal";
+    }
+
+    @GetMapping("/jadwal/filterDokter")
+    public String filterByDokter(int idDokter, Model model) {
+        model.addAttribute("jadwalList", jadwalService.getJadwalBySpecialisId(idDokter));
+        model.addAttribute("dokterList", jadwalService.getAllDokter());
+        model.addAttribute("specialisList", jadwalService.getAllSpecialis());
+        return "/jadwal";
+    }
 }

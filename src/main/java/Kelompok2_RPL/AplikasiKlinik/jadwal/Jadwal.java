@@ -11,5 +11,6 @@ public class Jadwal {
     private String namaDokter;
     private String namaSpecialis;
     private String hari;
+    private String jam;
     private int sisaSlot;
 }
