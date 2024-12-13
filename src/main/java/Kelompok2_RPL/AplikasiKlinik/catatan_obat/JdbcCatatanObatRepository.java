@@ -29,7 +29,7 @@ public class JdbcCatatanObatRepository implements CatatanObatRepository {
         FROM CatatanObat co
         JOIN Konsultasi k ON co.id_Konsul = k.id_Konsul
         JOIN Checkup c ON k.id_Checkup = c.id_Checkup 
-        WHERE id_Pasien = ?
+        WHERE c.id_Pasien = ?
         ORDER BY co.tanggal DESC
         """;
 

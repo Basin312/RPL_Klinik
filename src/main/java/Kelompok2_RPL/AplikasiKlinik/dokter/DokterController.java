@@ -42,8 +42,7 @@ public class DokterController {
     @GetMapping("/home")
     public String getIndex(Model model, @RequestParam(name = "filter", required = false) String filter){
         if(filter == null){ //ga pake filter
-            //TODO: GANTI JADI SESSION ID_DOKTER
-            List<PendaftaranKonsultasi> listAntrian = this.dokterService.getAllPendaftaran(1);
+            List<PendaftaranKonsultasi> listAntrian = this.dokterService.getAllPendaftaran((int) session.getAttribute("id_Dokter"));
             model.addAttribute("listAntrian", listAntrian);
             if(listAntrian.size() == 0){
                 model.addAttribute("nomor_antrian", null);
@@ -51,7 +50,7 @@ public class DokterController {
                 model.addAttribute("nomor_antrian", listAntrian.get(0).getNomor_antrian());
             }
         }else{
-            List<PendaftaranKonsultasi> listAntrian = this.dokterService.searchPendaftaranByName(1, filter);
+            List<PendaftaranKonsultasi> listAntrian = this.dokterService.searchPendaftaranByName((int) session.getAttribute("id_Dokter"), filter);
             model.addAttribute("listAntrian", listAntrian);
             model.addAttribute("filter", filter);
             if(listAntrian.size() == 0){
@@ -119,12 +118,10 @@ public class DokterController {
         }
 
         //masukin ke konsultasi
-        //TODO: GANTI SESSION ID_DOKTER
-        this.dokterService.tambahKonsultasi(diagnosa, 1, (int)session.getAttribute("id_Checkup"));
+        this.dokterService.tambahKonsultasi(diagnosa, (int) session.getAttribute("id_Dokter"), (int)session.getAttribute("id_Checkup"));
 
         //dapetin konsultasi yang baru dimasukin
-        //TODO: GANTI SESSION ID_DOKTER
-        Optional<Konsultasi> latestKonsultasi = this.dokterService.getKonsultasiTerbaruByDokterAndCurrDate(1);
+        Optional<Konsultasi> latestKonsultasi = this.dokterService.getKonsultasiTerbaruByDokterAndCurrDate((int) session.getAttribute("id_Dokter"));
         session.setAttribute("id_Konsul", latestKonsultasi.get().getId_Konsul().intValue());
 
         return "redirect:/dokter/konsultasi/" + id_Pasien; //balik lagi ke halaman konsultasi
