@@ -36,7 +36,7 @@ public class RegistrasiController {
             return "registerPasien";
         }
 
-        return "redirect:/result";
+        return "redirect:/loginPasien";
     }
 
     @GetMapping("/result")

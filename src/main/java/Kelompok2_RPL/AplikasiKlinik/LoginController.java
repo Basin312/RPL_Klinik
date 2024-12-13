@@ -34,7 +34,7 @@ public class LoginController {
         if(user==null){
             return "redirect:/loginPasien";
         }
-        session.setAttribute("Email", user);
+        session.setAttribute("User", user);
             return "redirect:/pasien";   //edit loc
     }
 
@@ -49,8 +49,8 @@ public class LoginController {
         if(user==null){
             return "redirect:/LoginDokter";
         }
-        session.setAttribute("Email", user);
-            return "redirect:/dokter";   //edit loc
+        session.setAttribute("User", user);
+            return "redirect:/dokter/home";   //edit loc
     }
 
     @GetMapping("/loginPerawat")
@@ -63,7 +63,8 @@ public class LoginController {
         if(user==null){
             return "redirect:/loginPerawat";
         }
-        session.setAttribute("Email", user);
+        session.setAttribute("User", user);
+        
             return "redirect:/perawat";   //edit loc
     }
     @GetMapping("/loginAdministrator")
@@ -76,7 +77,7 @@ public class LoginController {
         if(user==null){
             return "redirect:/loginAdministrator";
         }
-        session.setAttribute("Email", user);
+        session.setAttribute("User", user);
             return "redirect:/administrator/home";   //edit loc
     }
 

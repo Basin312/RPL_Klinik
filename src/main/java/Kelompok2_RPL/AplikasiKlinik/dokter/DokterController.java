@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import Kelompok2_RPL.AplikasiKlinik.User.RequiredRole;
 import Kelompok2_RPL.AplikasiKlinik.pendaftaran.PendaftaranKonsultasi;
 import jakarta.servlet.http.HttpSession;
 
@@ -22,6 +23,7 @@ public class DokterController {
     private HttpSession session;
     
     @GetMapping("/home")
+    @RequiredRole("dokter")
     public String getIndex(Model model, @RequestParam(name = "filter", required = false) String filter){
         if(filter == null){ //ga pake filter
             List<PendaftaranKonsultasi> listAntrian = this.dokterService.getAllPendaftaran((int) session.getAttribute("id_Dokter"));
