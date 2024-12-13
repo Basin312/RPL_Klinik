@@ -72,20 +72,28 @@
         </div>
 
         <!-- Form untuk memilih dokter dan spesialis -->
-        <div class="form-group">
-            <label for="dokter">Pilih Dokter:</label>
-            <select id="dokter" name="dokter">
-                <option value="">- Pilih Dokter -</option>
-                <option th:each="dokter : ${dokterList}" th:value="${dokter.nama}" th:text="${dokter.nama}"></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="specialis">Pilih Spesialis:</label>
-            <select id="specialis" name="specialis">
-                <option value="">- Pilih Spesialis -</option>
-                <option th:each="specialis : ${specialisList}" th:value="${specialis.nama}" th:text="${specialis.nama}"></option>
-            </select>
-        </div>
+        <form action="/jadwal/filterDokter" method="get">
+            <div class="form-group">
+                <label for="dokter">Pilih Dokter:</label>
+                <select id="dokter" name="idDokter">
+                    <option value="">- Pilih Dokter -</option>
+                    <option th:each="dokter : ${dokterList}" th:value="${dokter.id}" th:text="${dokter.nama}"></option>
+                </select>
+            </div>
+            <button type="submit">Search</button>
+        </form>
+
+        <form action="/jadwal/filterSpecialis" method="get">
+            <div class="form-group">
+                <label for="specialis">Pilih Spesialis:</label>
+                <select id="specialis" name="idSpecialis">
+                    <option value="">- Pilih Spesialis -</option>
+                    <option th:each="specialis : ${specialisList}" th:value="${specialis.id}" th:text="${specialis.nama}"></option>
+                </select>
+            </div>
+            <button type="submit">Search</button>
+        </form>
+
 
         <!-- Tabel jadwal dokter -->
         <table>
@@ -93,7 +101,8 @@
                 <tr>
                     <th>Nama Dokter</th>
                     <th>Spesialis</th>
-                    <th>Hari</th>
+                    <th>Tanggal</th>
+                    <th>Jam</th>
                     <th>Sisa Slot</th>
                     <th>Aksi</th>
                 </tr>
@@ -103,6 +112,10 @@
                     <td th:text="${jadwal.namaDokter}"></td>
                     <td th:text="${jadwal.namaSpecialis}"></td>
                     <td th:text="${jadwal.hari}"></td>
+                    <!--hari ganti jadi tanggal Hari DAN tanggal
+                        ngikut sistem, misal hari sensin mau book jumat, same week.
+                        hari rabu book senin, next week-->
+                    <td th:text="${jadwal.jam}"></td>
                     <td th:text="${jadwal.sisaSlot}"></td>
                     <td>
                         <button class="btn-book" th:if="${jadwal.sisaSlot > 0}">Booking</button>
