@@ -1,6 +1,7 @@
 package Kelompok2_RPL.AplikasiKlinik;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import Kelompok2_RPL.AplikasiKlinik.User.LoginPage.LoginService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
+@EnableAspectJAutoProxy
 public class LoginController {
     @Autowired 
     private LoginService users;
@@ -33,7 +35,7 @@ public class LoginController {
             return "redirect:/loginPasien";
         }
         session.setAttribute("Email", user);
-            return "redirect:/dashboard";   //edit loc
+            return "redirect:/pasien";   //edit loc
     }
 
     @GetMapping("/loginDokter")
@@ -48,7 +50,7 @@ public class LoginController {
             return "redirect:/LoginDokter";
         }
         session.setAttribute("Email", user);
-            return "redirect:/dashboard";   //edit loc
+            return "redirect:/dokter";   //edit loc
     }
 
     @GetMapping("/loginPerawat")
@@ -62,7 +64,7 @@ public class LoginController {
             return "redirect:/loginPerawat";
         }
         session.setAttribute("Email", user);
-            return "redirect:/dashboard";   //edit loc
+            return "redirect:/perawat";   //edit loc
     }
     @GetMapping("/loginAdministrator")
     public String loginAdministrator(){
@@ -75,7 +77,7 @@ public class LoginController {
             return "redirect:/loginAdministrator";
         }
         session.setAttribute("Email", user);
-            return "redirect:/dashboard";   //edit loc
+            return "redirect:/administrator/home";   //edit loc
     }
 
     @GetMapping("/loginAdmin")
@@ -90,16 +92,6 @@ public class LoginController {
         }
         session.setAttribute("Email", user);
             return "redirect:/admin";   //edit loc
-    }
-
-    @GetMapping("/dashboard") //edit loc
-    @ResponseBody
-    public String index(HttpSession session){
-        Login user = (Login)session.getAttribute("email");
-        if(user==null){
-            return "redirect:/LoginDokter";
-        }
-        return "dashboard";
     }
 }
 
