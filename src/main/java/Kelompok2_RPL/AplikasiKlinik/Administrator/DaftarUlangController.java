@@ -32,13 +32,9 @@ public class DaftarUlangController {
         return "administrator/daftarulang";
     }
 
-    // Halaman detail pasien
     @GetMapping("/administrator/detailPasien")
     public String detailPasien(@RequestParam("id") int id, Model model) {
         DetailPasienDTO detailPasien = daftarUlangService.getDetailPasienById(id);
-        if (detailPasien == null) {
-            throw new RuntimeException("Data pasien tidak ditemukan untuk ID: " + id);
-        }
         model.addAttribute("pasien", detailPasien);
         return "administrator/detailPasien";
     }

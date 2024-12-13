@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -28,5 +29,18 @@ public class TransaksiController {
         model.addAttribute("pasienList", pasienList);
         model.addAttribute("keyword", keyword);
         return "administrator/transaksi";
+    }
+
+    @GetMapping("/administrator/detailTransaksi")
+    public String detailTransaksi(@RequestParam("id") int idPasien, Model model) {
+        DetailTransaksiDTO detailTransaksi = transaksiService.getDetailTransaksi(idPasien);
+        model.addAttribute("transaksi", detailTransaksi);
+        return "administrator/detailTransaksi";
+    }
+
+    @PostMapping("/updateTransaksiStatus")
+    public String updateTransaksiStatus(@RequestParam("id") int idPasien, @RequestParam("methodBayar") String methodBayar, @RequestParam("status") String status) {
+        transaksiService.updateTransaksiByPasien(idPasien, status, methodBayar);
+        return "redirect:/administrator/transaksi";
     }
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Transaksi</title>
+    <link rel="stylesheet" href="/Administrator/css/detailTransaksi.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <a href="/administrator/home">
+                    <img src="/Administrator/image/klinik.jpg" alt="Logo" class="logo-image">
+                </a>
+            </div>
+            <div class="title">Poliklinik Sehat Selalu</div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <div class="welcome-message">
+                <h1>Welcome,<br>Administrator</h1>
+            </div>
+            <div class="separator"></div>
+
+            <!-- Form Detail Transaksi -->
+            <div class="form-container">
+                <form action="/updateTransaksiStatus" method="POST">
+                    <input type="hidden" name="id" th:value="${transaksi.idPasien}">
+                    <input type="hidden" name="status" value="Sudah Bayar">
+
+                    <div class="form-group">
+                        <label for="nama">Nama Pasien:</label>
+                        <span id="nama" th:text="${transaksi.nama}">Default Nama</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tanggalKonsultasi">Tanggal Konsultasi:</label>
+                        <span id="tanggalKonsultasi" th:text="${transaksi.tanggalKonsultasi != null ? #dates.format(transaksi.tanggalKonsultasi, 'yyyy-MM-dd') : 'N/A'}">Default Tanggal</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="harga">Biaya Konsultasi:</label>
+                        <span id="harga" th:text="${transaksi.harga != null ? #numbers.formatCurrency(transaksi.harga) : 'N/A'}">Default Harga</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="methodBayar">Metode Pembayaran:</label>
+                        <select id="methodBayar" name="methodBayar" class="dropdown">
+                            <option value="TUNAI" th:selected="${transaksi.methodBayar == 'TUNAI'}">TUNAI</option>
+                            <option value="NON_TUNAI" th:selected="${transaksi.methodBayar == 'NON_TUNAI'}">NON-TUNAI</option>
+                        </select>
+                    </div>
+                    
+
+                    <!-- Tombol untuk memperbarui status transaksi -->
+                    <button type="submit" class="submit-button">Konfirmasi Pembayaran</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
