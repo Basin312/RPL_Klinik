@@ -16,11 +16,11 @@ public class JdbcPendaftranKonsultasiRepository implements PendaftaranKonsultasi
     public List<PendaftaranKonsultasi> getAllPendaftaran(int id_Dokter){
         String sql = 
         """
-        SELECT *
+        SELECT pd.id_Pendaftaran, pd.tanggal_pendaftaran, pd.nomor_antrian, pd.id_Jadwal, pd.id_Pasien, pd.is_Daftar, pd.is_Checkup, pd.is_Konsul, p.nama
         FROM Pendaftaran pd
         JOIN Pasien p ON pd.id_Pasien = p.id_Pasien
         JOIN Jadwal j ON pd.id_Jadwal = j.id_Jadwal
-        WHERE pd.tanggal_pendaftaran = CURRENT_DATE AND pd.is_Checkup = TRUE AND j.id_Dokter = ?
+        WHERE pd.tanggal_pendaftaran = CURRENT_DATE AND pd.is_Daftar = TRUE AND pd.is_Checkup = TRUE AND pd.is_Konsul = FALSE AND j.id_Dokter = ?
         ORDER BY pd.nomor_antrian ASC
         """;
         
@@ -31,11 +31,11 @@ public class JdbcPendaftranKonsultasiRepository implements PendaftaranKonsultasi
     public List<PendaftaranKonsultasi> searchPendaftaranByName(int id_Dokter, String filter){
         String sql = 
         """
-        SELECT *
+        SELECT pd.id_Pendaftaran, pd.tanggal_pendaftaran, pd.nomor_antrian, pd.id_Jadwal, pd.id_Pasien, pd.is_Daftar, pd.is_Checkup, pd.is_Konsul, p.nama
         FROM Pendaftaran pd
         JOIN Pasien p ON pd.id_Pasien = p.id_Pasien
         JOIN Jadwal j ON pd.id_Jadwal = j.id_Jadwal
-        WHERE pd.tanggal_pendaftaran = CURRENT_DATE AND pd.is_Checkup = TRUE AND j.id_Dokter = ? AND p.nama ILIKE ?
+        WHERE pd.tanggal_pendaftaran = CURRENT_DATE AND pd.is_Daftar = TRUE AND pd.is_Checkup = TRUE AND pd.is_Konsul = FALSE AND j.id_Dokter = ? AND p.nama ILIKE ?
         ORDER BY pd.nomor_antrian ASC
         """;
 
@@ -43,6 +43,17 @@ public class JdbcPendaftranKonsultasiRepository implements PendaftaranKonsultasi
 
         List<PendaftaranKonsultasi> list = jdbcTemplate.query(sql, this::MapRowToPendaftaranKonsultasi, id_Dokter, keyword);
         return list;
+    }
+
+    public void setIsKonsul(int id_Pendaftaran){
+        String sql = 
+        """
+        UPDATE Pendaftaran
+        SET is_Konsul = TRUE
+        WHERE id_Pendaftaran = ?
+        """;
+
+        this.jdbcTemplate.update(sql, id_Pendaftaran);
     }
 
     private PendaftaranKonsultasi MapRowToPendaftaranKonsultasi(ResultSet resultSet, int rowNum) throws SQLException{

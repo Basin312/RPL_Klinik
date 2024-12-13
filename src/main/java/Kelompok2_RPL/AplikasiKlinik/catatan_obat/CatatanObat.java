@@ -1,18 +1,27 @@
 package Kelompok2_RPL.AplikasiKlinik.catatan_obat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
 public class CatatanObat {
-    private int id_Obat;
+    private Integer id_Obat;
+
+    @NotNull
+    @Size(min = 4, max = 50)
     private String obat;
+
+    @NotNull
+    @Size(min = 4, max = 50)
     private String dosis;
-    private Date tanggal;
-    private int id_Konsul;
+
+    private LocalDate tanggal;
+    private Integer id_Konsul;
 
     // id_Obat SERIAL PRIMARY KEY,
     // obat VARCHAR(50), --nama obatnya, cth kaya obat pilek, ini diketik dokternya

@@ -6,11 +6,12 @@ body{
 .container{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 2fr 2fr;
+    grid-template-rows: 1fr 2fr 2fr auto;
     grid-template-areas: 
         "identitas_pasien identitas_pasien"
         "history_check_up history_diagnosa"
-        "dok_pendukung history_obat";
+        "dok_pendukung history_obat"
+        "button_back button_back";
     row-gap: 15px;
     column-gap: 15px;
 }
@@ -137,4 +138,24 @@ td {
     justify-content: flex-start;
     align-items: center;
     overflow: hidden;
+}
+
+/*---------------------------------------------------------*/
+
+.button_back {
+    grid-area: button_back;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.button_back button {
+    background-color: #0056a4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
 }

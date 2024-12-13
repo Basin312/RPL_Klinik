@@ -17,7 +17,7 @@
                         </span>
                     </a>
                     Poliklinik Sehat Selalu
-                    <a th:href="@{/dokter/}">
+                    <a th:href="@{/dokter/logout}">
                         <span class="logout_icon">
                             <input type="image" src="/image/Icon Logout.png">
                         </span>
@@ -48,8 +48,8 @@
                                     <td th:text="${row.nomor_antrian}">67</td>
                                     <td th:text="${row.is_Daftar}">Menunggu</td>
                                     <td>
-                                        <a th:href="@{/konsultasi/{id_Pasien}(id_Pasien=${row.id_Pasien})}">
-                                            <button class="konsul_button" disabled>Konsultasi</button>
+                                        <a th:href="@{/dokter/konsultasi/{id_Pasien}(id_Pasien=${row.id_Pasien}, id_Pendaftaran=${row.id_Pendaftaran})}">
+                                            <button class="konsul_button">Konsultasi</button>
                                         </a>
                                     </td>
                                 </tr>
@@ -61,7 +61,7 @@
         </div>
     </div>
 
-    <script defer>
+    <!-- <script defer>
         (function (){
             var buttons = document.getElementsByClassName("konsul_button")
             
@@ -74,6 +74,6 @@
                 }
             }
         })();
-    </script>
+    </script> -->
 </body>
 </html>

@@ -36,9 +36,9 @@ public class JdbcPasienDokterRepository implements PasienDokterRepository {
 
 
         return new PasienDokter(
-            resultSet.getString("p.nama"),
+            resultSet.getString("nama"),
             umur,
-            resultSet.getString("p.jenis_kelamin"),
+            resultSet.getString("jenis_kelamin"),
             tanggal_lahir
         );
     }

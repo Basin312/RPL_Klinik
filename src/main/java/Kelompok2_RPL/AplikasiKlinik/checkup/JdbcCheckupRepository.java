@@ -22,10 +22,24 @@ public class JdbcCheckupRepository implements CheckupRepository {
         SELECT *
         FROM Checkup c
         WHERE id_Pasien = ? AND tanggal = CURRENT_DATE
+        LIMIT 1
         """;
 
         List<Checkup> checkup = jdbcTemplate.query(sql, this::mapRowToCheckup, id_Pasien);
         return checkup.size() == 0 ? Optional.empty() : Optional.of(checkup.get(0));
+    }
+
+    public List<Checkup> getCheckupByPasien(int id_Pasien){
+        String sql =
+        """
+        SELECT *
+        FROM Checkup c
+        WHERE id_Pasien = ?
+        ORDER BY tanggal DESC
+        """;
+
+        List<Checkup> list = jdbcTemplate.query(sql, this::mapRowToCheckup, id_Pasien);
+        return list;
     }
 
     private Checkup mapRowToCheckup(ResultSet resultSet, int rowNum) throws SQLException{

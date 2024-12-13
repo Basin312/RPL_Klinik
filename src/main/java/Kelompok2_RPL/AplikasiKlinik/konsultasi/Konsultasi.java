@@ -1,18 +1,24 @@
 package Kelompok2_RPL.AplikasiKlinik.konsultasi;
 
-import java.util.Date;
+import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
 public class Konsultasi {
-    private int id_Konsul;
+    private Integer id_Konsul;
+
+    @NotNull
+    @Size(min = 4, max = 100)
     private String diagnosa;
-    private Date tanggal;
-    private int id_Dokter;
-    private int id_Checkup;
+
+    private LocalDate tanggal;
+    private Integer id_Dokter;
+    private Integer id_Checkup;
     
     /*
     id_Konsul SERIAL PRIMARY KEY,
