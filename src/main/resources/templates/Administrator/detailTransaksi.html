@@ -27,7 +27,7 @@
 
             <!-- Form Detail Transaksi -->
             <div class="form-container">
-                <form action="/updateTransaksiStatus" method="POST">
+                <form action="/updateTransaksiStatus" method="POST" th:if="${!isReadOnly}">
                     <input type="hidden" name="id" th:value="${transaksi.idPasien}">
                     <input type="hidden" name="status" value="Sudah Bayar">
 
@@ -58,6 +58,29 @@
                     <!-- Tombol untuk memperbarui status transaksi -->
                     <button type="submit" class="submit-button">Konfirmasi Pembayaran</button>
                 </form>
+
+                <!-- Tampilan Read-Only -->
+                <div th:if="${isReadOnly}">
+                    <div class="form-group">
+                        <label for="nama">Nama Pasien:</label>
+                        <span id="nama" th:text="${transaksi.nama}">Default Nama</span>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="tanggalKonsultasi">Tanggal Konsultasi:</label>
+                        <span id="tanggalKonsultasi" th:text="${transaksi.tanggalKonsultasi != null ? #dates.format(transaksi.tanggalKonsultasi, 'yyyy-MM-dd') : 'N/A'}">Default Tanggal</span>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="harga">Biaya Konsultasi:</label>
+                        <span id="harga" th:text="${transaksi.harga != null ? #numbers.formatCurrency(transaksi.harga) : 'N/A'}">Default Harga</span>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="methodBayar">Metode Pembayaran:</label>
+                        <span id="methodBayar" th:text="${transaksi.methodBayar}"></span>
+                    </div>
+                </div>
             </div>
         </main>
     </div>

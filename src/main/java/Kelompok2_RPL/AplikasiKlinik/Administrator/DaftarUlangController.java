@@ -36,6 +36,7 @@ public class DaftarUlangController {
     public String detailPasien(@RequestParam("id") int id, Model model) {
         DetailPasienDTO detailPasien = daftarUlangService.getDetailPasienById(id);
         model.addAttribute("pasien", detailPasien);
+        model.addAttribute("isReadOnly", detailPasien.isReadOnly());
         return "administrator/detailPasien";
     }
 

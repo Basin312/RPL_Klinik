@@ -24,6 +24,12 @@ public class TransaksiService {
     }
 
     public void updateTransaksiByPasien(int idPasien, String status, String methodBayar) {
+        DetailTransaksiDTO detail = TransaksiRepository.findDetailTransaksiById(idPasien);
+
+        if (detail.isReadOnly()) {
+            throw new UnsupportedOperationException("Transaksi ini sudah selesai dan tidak dapat diubah lagi.");
+        }
+        
         boolean is_Bayar = status.equalsIgnoreCase("Sudah Bayar");
         TransaksiRepository.updateTransaksi(idPasien, is_Bayar, methodBayar);
     }

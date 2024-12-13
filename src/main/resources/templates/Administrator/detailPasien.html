@@ -27,7 +27,7 @@
 
             <!-- Form Detail Pasien -->
             <div class="form-container">
-                <form action="/updateStatus" method="POST">
+                <form action="/updateStatus" method="POST" th:if="${!isReadOnly}">
                     <input type="hidden" name="id" th:value="${pasien.idPasien}">
                     <input type="hidden" name="status" value="Selesai">
                     
@@ -65,6 +65,40 @@
                     <!-- Tombol untuk memperbarui status pasien -->
                     <button type="submit" class="submit-button">Selesai</button>
                 </form>
+
+                <!-- Tampilan Read-Only -->
+                <div th:if="${isReadOnly}">
+                    <div class="form-group">
+                        <label for="nama">Nama:</label>
+                        <span id="nama" th:text="${pasien.nama}">Default Nama</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tanggalPendaftaran">Tanggal Pendaftaran:</label>
+                        <span id="tanggalPendaftaran" th:text="${pasien.tanggalPendaftaran != null ? #dates.format(pasien.tanggalPendaftaran, 'yyyy-MM-dd') : 'N/A'}">>Default Tanggal</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telp">No. Hp:</label>
+                        <span id="noHp" th:text="${pasien.noHp}">Default No Hp</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jenisKelamin">Jenis Kelamin:</label>
+                        <span id="jenisKelamin" th:text="${pasien.jenisKelamin}">Default Jenis Kelamin</span>
+                    </div>
+
+                    <!-- Tampilkan informasi tambahan: Dokter dan Jam Konsul -->
+                    <div class="form-group">
+                        <label for="dokter">Dokter:</label>
+                        <span id="namaDokter" th:text="${pasien.namaDokter}">Default Nama Dokter</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jamKonsul">Jam Konsul:</label>
+                        <span id="jamKonsul" th:text="${pasien.jamKonsul}">Default Jam Konsul</span>
+                    </div>
+                </div>
             </div>
         </main>
     </div>

@@ -59,7 +59,11 @@ public class JdbcTransaksiRepository implements TransaksiRepository{
             p.nama, 
             pd.tanggal_pendaftaran AS tanggalKonsultasi, 
             s.harga AS harga, 
-            t.methodBayar AS methodBayar
+            t.methodBayar AS methodBayar,
+            CASE t.is_Bayar
+                WHEN false THEN 'Belum Bayar' 
+                ELSE 'Sudah Bayar' 
+            END AS status
         FROM Pasien p
         JOIN Pendaftaran pd ON p.id_Pasien = pd.id_Pasien
         JOIN Transaksi t ON pd.id_Pendaftaran = t.id_Pendaftaran
@@ -118,12 +122,14 @@ public class JdbcTransaksiRepository implements TransaksiRepository{
     }
 
     private DetailTransaksiDTO mapRowToDetailTransaksiDTO(ResultSet resultSet, int rowNum) throws SQLException {
+        boolean isReadOnly = "Sudah Bayar".equalsIgnoreCase(resultSet.getString("status"));
         return new DetailTransaksiDTO(
             resultSet.getInt("id_Pasien"),
             resultSet.getString("nama"),
             resultSet.getDate("tanggalKonsultasi"),
             resultSet.getBigDecimal("harga"),
-            DetailTransaksiDTO.MethodBayar.valueOf(resultSet.getString("methodBayar"))
+            DetailTransaksiDTO.MethodBayar.valueOf(resultSet.getString("methodBayar")),
+            isReadOnly
         );
     }
 

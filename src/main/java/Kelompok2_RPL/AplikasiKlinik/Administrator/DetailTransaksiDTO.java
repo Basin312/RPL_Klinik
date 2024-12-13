@@ -14,6 +14,7 @@ public class DetailTransaksiDTO {
     private Date tanggalKonsultasi;
     private BigDecimal harga;
     private MethodBayar methodBayar;
+    private boolean isReadOnly;
 
     public enum MethodBayar {
         TUNAI("TUNAI"),

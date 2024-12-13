@@ -35,6 +35,7 @@ public class TransaksiController {
     public String detailTransaksi(@RequestParam("id") int idPasien, Model model) {
         DetailTransaksiDTO detailTransaksi = transaksiService.getDetailTransaksi(idPasien);
         model.addAttribute("transaksi", detailTransaksi);
+        model.addAttribute("isReadOnly", detailTransaksi.isReadOnly());
         return "administrator/detailTransaksi";
     }
 
