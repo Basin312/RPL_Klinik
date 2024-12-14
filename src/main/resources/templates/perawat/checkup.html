@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/perawat/perawat.css">
+</head>
+<body>
+    <div class="bg_image">
+        <header>
+            <span class="home_logo">
+                <input type="image" src="/image/Logo Klinik.png">
+                Poliklinik Sehat Selalu
+            </span>
+
+            <span class="logout_icon">
+                <input type="image" src="/image/Icon Logout.png">
+            </span>
+        </header>
+        <div name="maindata" >
+            <p class="label1">Nama :</p>
+            <p th:text="${nama}" class="out1"></p>
+            <p class="label1">gender</p>
+            <p th:text="${gender}" class="out1"></p>
+            <p class="label1">umur</p>
+            <p th:text="${umur}" class="out1"></p>
+            <p>Tanggal</p>
+            <p th:text="${tanggal}"></p>
+            <form action="/konfirm" method="post">
+                <p>berat</p>
+                <input type="number" step="0.01" placeholder="Enter a decimal number" name="berat" id="">
+                <p>tinggi</p>
+                <input type="number" step="0.01" placeholder="Enter a decimal number" name="tinggi">
+                <p>tekanan darah</p>
+                <input type="text" name="darah"> <!-- Fixed here -->
+                <input type="hidden" th:value="${tanggal}" name="tanggal">
+                <input type="hidden" th:value="${id}" name="id">
+                <p>dokumen pendukun</p>
+                <input type="file">
+                <button type="submit">konfirm</button>
+            </form>
+
+            <div>
+                <form action="/perawat">
+                    <button type="submit">back</button>
+                </form>
+            </div>
+            
+        </div>
+        <div class="footer"></div>
+    </div>
+</body>
+</html>

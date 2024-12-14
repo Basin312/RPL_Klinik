@@ -4,13 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/css/perawat/perawat.css">
 </head>
 <body>
-    <div class="navbar">
-        <img src="/image/logoKlinik.jpg" alt="logo rumah sakit" class="logoRumahSakit">
-        <p class="nama[aplikasi]">Poliklinik Sehat Selalu</p>
-        <img src="/image/logout.jpg" alt="logo sign out" class="logoLogOut">
+    <div class="bg_image">
+        <header>
+            <span class="home_logo">
+                <input type="image" src="/image/Logo Klinik.png">
+                Poliklinik Sehat Selalu
+            </span>
+
+            <span class="logout_icon">
+                <input type="image" src="/image/Icon Logout.png">
+            </span>
+        </header>
+        <div class="container">
+            <div name="filter" class="filter">
+                <form action="" >
+                    <button class="button">Antrian</button>
+                </form>
+                <form action="" >
+                    <button class="button">History</button>
+                </form>
+            </div>
+
+            <div class="list">
+                <div class="head">
+                    <p>nama pasien</p> 
+                </div>
+                <div th:each="row: ${rell}" class="isi">
+                    <p th:text="${row.nama}"></p>
+                    <p th:text="${row.tanggal}"></p>
+                    <form action="/checkup" method="post">
+                        <input type="hidden" name="id" th:value="${row.id}">
+                        <input type="hidden" name="date" th:value="${row.tanggal}">
+                        <button type="submit">Isi</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="upload"></div>
+            <div class="footer"></div>
+        </div>
     </div>
 </body>
 </html>
