@@ -15,4 +15,5 @@ public class DetailPasienDTO {
     private String jenisKelamin;
     private String namaDokter;
     private String jamKonsul;
+    private boolean isReadOnly;
 }

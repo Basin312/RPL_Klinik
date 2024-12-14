@@ -46,7 +46,11 @@ public class JdbcDaftarUlangRepository implements DaftarUlangRepository {
 
     private final String SELECT_DETAIL_PASIEN =
     """
-        SELECT p.id_Pasien, p.nama, pd.tanggal_pendaftaran AS tanggalPendaftaran, p.no_hp AS noHp, p.jenis_kelamin AS jenisKelamin, d.nama AS namaDokter, j.jam AS jamKonsul
+        SELECT p.id_Pasien, p.nama, pd.tanggal_pendaftaran AS tanggalPendaftaran, p.no_hp AS noHp, p.jenis_kelamin AS jenisKelamin, d.nama AS namaDokter, j.jam AS jamKonsul,
+        CASE pd.is_Daftar 
+                WHEN false THEN 'Menunggu' 
+                ELSE 'Selesai'
+        END AS status 
         FROM Pasien p
         JOIN Pendaftaran pd ON p.id_Pasien = pd.id_Pasien
         JOIN Jadwal j ON pd.id_Jadwal = j.id_Jadwal
@@ -57,7 +61,7 @@ public class JdbcDaftarUlangRepository implements DaftarUlangRepository {
     """;
 
 
-    private final String UPADTE_IS_DAFTAR = 
+    private final String UPDATE_IS_DAFTAR = 
     """
         UPDATE Pendaftaran
         SET is_daftar = ?
@@ -81,7 +85,7 @@ public class JdbcDaftarUlangRepository implements DaftarUlangRepository {
 
     @Override
     public void updateIsDaftarByIdPasien(int idPasien, boolean is_daftar) {
-        jdbcTemplate.update(UPADTE_IS_DAFTAR, is_daftar, idPasien);
+        jdbcTemplate.update(UPDATE_IS_DAFTAR, is_daftar, idPasien);
     }
 
     private PasienStatusDTO mapRowToPasienStatusDTO(ResultSet resultSet, int rowNum) throws SQLException {
@@ -93,6 +97,8 @@ public class JdbcDaftarUlangRepository implements DaftarUlangRepository {
     }
 
     private DetailPasienDTO mapRowToDetailPasienDTO(ResultSet resultSet, int rowNum) throws SQLException {
+        String status = resultSet.getString("status");
+        boolean isReadOnly = status != null && "Selesai".equalsIgnoreCase(status);
         return new DetailPasienDTO(
             resultSet.getInt("id_Pasien"),
             resultSet.getString("nama"),
@@ -100,7 +106,8 @@ public class JdbcDaftarUlangRepository implements DaftarUlangRepository {
             resultSet.getString("noHp"),
             resultSet.getString("jenisKelamin"),
             resultSet.getString("namaDokter"),
-            resultSet.getString("jamKonsul")
+            resultSet.getString("jamKonsul"),
+            isReadOnly
         );
     }
 }
