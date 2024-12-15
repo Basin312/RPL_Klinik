@@ -16,7 +16,22 @@ public class DaftarUlangService {
         return daftarUlangRepository.findAllWithStatus();
     }
 
+    public List<PasienStatusDTO> searchPasienByName(String keyword) {
+        return daftarUlangRepository.findByName(keyword);
+    }
+
     public DetailPasienDTO getDetailPasienById(int id) {
         return daftarUlangRepository.findDetailPasienById(id);
+    }
+
+    public void updatePasienStatus(int idPasien, String status) {
+        DetailPasienDTO detail = daftarUlangRepository.findDetailPasienById(idPasien);
+
+        if (detail.isReadOnly()) {
+            throw new UnsupportedOperationException("Daftar ulang ini sudah selesai dan tidak dapat diubah lagi.");
+        }
+
+        boolean is_daftar = status.equalsIgnoreCase("Selesai");
+        daftarUlangRepository.updateIsDaftarByIdPasien(idPasien, is_daftar);
     }
 }

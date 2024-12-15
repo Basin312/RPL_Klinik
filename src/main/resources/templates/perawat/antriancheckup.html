@@ -4,13 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/css/perawat/perawat.css">
+    <script>
+        // Function to filter datalist options dynamically as user types
+        function filterOptions() {
+            const input = document.getElementById('options').value.toLowerCase();
+            const datalist = document.getElementById('data-options');
+            const options = datalist.getElementsByTagName('option');
+            
+            for (let option of options) {
+                const optionText = option.textContent.toLowerCase();
+                if (optionText.includes(input)) {
+                    option.style.display = ''; // Show the option
+                } else {
+                    option.style.display = 'none'; // Hide the option
+                }
+            }
+        }
+    </script>
 </head>
 <body>
-    <div class="navbar">
-        <img src="/image/klinik.jpg" alt="logo rumah sakit" class="logoRumahSakit">
-        <p class="nama[aplikasi]">Poliklinik Sehat Selalu</p>
-        <img src="/image/logout.jpg" alt="logo sign out" class="logoLogOut">
+    <div class="bg_image">
+        <header>
+            <span class="home_logo">
+                <input type="image" src="/image/Logo Klinik.png">
+                Poliklinik Sehat Selalu
+            </span>
+
+            <span class="logout_icon">
+                <input type="image" src="/image/Icon Logout.png">
+            </span>
+        </header>
+        <div class="content">
+            <div class="container">
+                <div name="filter" class="filter">
+                    <form action="" >
+                        <button class="button">Antrian</button>
+                    </form>
+                    <form action="" >
+                        <button class="button">History</button>
+                    </form>
+                </div>
+
+                <div name="search" class="containerS">
+                    <form action="perawat" method="get">
+                        <input type="text" class="search">
+                        <button type="submit" class="buttonsearch">search</button>
+                    </form>
+                </div>
+
+                <div class="list">
+                    <div class="head">
+                        <p>nama pasien</p> 
+                    </div>
+                    <div th:each="row: ${rell}" class="isi">
+                        <p th:text="${row.nama}"></p>
+                        <p th:text="${row.tanggal}"></p>
+                        <form action="/checkup" method="post">
+                            <input type="hidden" name="id" th:value="${row.id_Pasien}">
+                            <input type="hidden" name="date" th:value="${row.tanggal}">
+                            <button type="submit">Isi</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="upload">
+                <form action="/uploadfile" method="post" enctype="multipart/form-data">
+                    <input 
+                    list="data-options" 
+                    id="options" 
+                    name="options" 
+                    placeholder="Type here..." 
+                    onkeyup="filterOptions()"
+                />
+                <datalist id="data-options">
+                    <option th:each="item : ${list}" 
+                        th:value="${item.id_Pasien}" 
+                        th:text="${item.nama}">
+                        Option Name
+                    </option>
+                </datalist>
+                <input type="file" name="file" >
+                    <button type="submit">upload</button>
+                </form>
+                
+                <div th:if="${error}" class="error-message">
+                    <p th:text="${error}"></p>
+                </div>
+                <div th:if="${success}" class="success-message">
+                    <p th:text="${success}"></p>
+                    <!-- Show selected option -->
+                    <p th:if="${selectedOption}" th:text="'Selected Option: ' + ${selectedOption}"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer"></div>
     </div>
 </body>
 </html>

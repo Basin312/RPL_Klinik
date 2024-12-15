@@ -32,8 +32,10 @@
 
             <!-- Form Registrasi Ulang -->
             <div class="form-container">
-                <input type="text" placeholder="Cari pasien..." class="search-bar">
-                <button class="search-button">Cari</button>
+                <form action="/administrator/daftarulang" method="GET">
+                    <input type="text" name="keyword" placeholder="Cari pasien..." class="search-bar" th:value="${keyword}">
+                    <button class="search-button">Cari</button>
+                </form>
             </div>
 
             <!-- Tabel Daftar Pasien -->
