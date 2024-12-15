@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                color: white;
+            }
+            .container{
+                background-image: url("image/image.jpg");
+            }
+            .gridder{
+                display: grid;
+                grid-template-rows: 35px auto 35px 50% 35px;
+                grid-template-columns: 35% auto auto;
+                grid-template-areas:
+                'header header header'
+                '. . .'
+                'directory directory directory'
+                'queue main main'
+                'footer footer footer';
+                width: 100%;
+                height: 100%;
+            }
+            .header {
+                grid-area: header;
+                background-color: rgb(0, 123, 255);
+                padding-left: 10px;
+                padding-right: 10px;
+                align-content: center;
+                display: flex;
+                justify-content: space-between;
+            }
+            .directory {
+                grid-area: directory;
+                background-color: rgb(0, 123, 255);
+                align-content: center;
+                align-items: center;
+                padding-left: 20px;
+                padding-right: 20px;
+                height: 35px;
+            }
+            button{
+                background-color: rgb(0, 123, 255);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                height: 30px ;
+                border-radius: 5px;
+                color: white;
+            }
+            .left{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .right{
+                align-items: center;
+                display: flex;
+                gap: 10px;
+            }
+            .queue{
+                grid-area: queue;
+                background-color: #92A237;
+                padding-left: 10px;
+                padding-right: 10px;
+                text-align: center;
+            }
+            .queue h1{
+                font-size: 100px;
+            }
+            .main{
+                grid-area: main;
+                background-color: #A7E8FE;
+            }
+            .footer{
+                grid-area: footer;
+                background-color: #101f58;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+        </style>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="gridder">
+                <div class="header">
+                    <div class="left">
+                        <img src="image/Logo Klinik.png" height="35px">
+                        <h3>Poliklinik Sehat Selalu</h3>
+                    </div>
+
+                    <div class="right">
+                        <img src="image/Icon Orang.png" height="40px">
+                        <a href="/logout">
+                            <img src="image/Icon Logout.png" height="30px" alt="Logout">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="directory">
+                    <a href="/jadwal">
+                        <button>Jadwal dan Booking Dokter</button>
+                    </a>
+                </div>
+
+                <div class="queue">
+                    <h2>Nomor Antrian Pasien</h2>
+                    <h1 th:if="${home != null}" th:text="${home.nomorantrian}"></h1>
+                    <h1 th:if="${home == null}">-</h1>
+                    <h3>Konsultasi dengan dokter</h3>
+                </div>
+
+                <div class="main">
+                </div>
+
+                <div class="footer">
+                    <p id="alamat">Jl. Pasteur No.38</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
