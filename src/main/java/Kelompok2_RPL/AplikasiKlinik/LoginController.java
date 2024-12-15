@@ -93,5 +93,7 @@ public class LoginController {
         session.setAttribute("Email", user);
             return "redirect:/admin";   //edit loc
     }
+
+    
 }
 

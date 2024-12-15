@@ -82,5 +82,26 @@ public class JdbcPerawat implements PerawatRepository {
             throw new RuntimeException("Failed to create checkup and update pendaftaran: " + e.getMessage());
         }
     }
+
+    @Override
+    public Optional<Pasien> findByName(String regex) {
+        // Use ~* for case-insensitive regex search
+        String sql = "SELECT * FROM pasien WHERE name ~* ?";
+        
+        try {
+            List<Pasien> result = jdbc.query(sql, this::mapRowToPasien, regex);
+            return result.isEmpty() ? Optional.empty() : Optional.of(result.get(0));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while fetching pasien with regex: " + regex, e);
+        }
+    }
+
+    @Override
+    public List<Pasien> findPasiens() {
+       String sql = "select * from pasien";
+       return jdbc.query(sql, this::mapRowToPasien);
+    }
+    
     
 }

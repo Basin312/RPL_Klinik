@@ -49,8 +49,10 @@ header {
 
 .head{
     background-color:#407CE2;
-    width: 50rem;
+    width: 36rem;
     height: 50px;
+    box-sizing: border-box;
+    display: flex;
 }
 
 .isi{
@@ -65,20 +67,57 @@ header {
 }
 .button{
     height: 50px;
-    width: 25rem;
+    width: 18rem;
     font-size: 30px;
 background-color: #00A1FF;
 }
 
 .container{
-    width: 50rem;
-    height: 34rem;
+    width: 36rem;
+    height: 31rem;
     background-color: grey;
     margin-left: 20px;
     margin-top: 20px;
+    grid-area: left;
 }
 .footer{
     width: 100%;
-    height: 10rem;
+    height: 4rem;
     background-color: #2E3282;
+    position: absolute;
+    bottom: 0%;
+}
+
+.content{
+    display: grid;
+    grid-template-areas: 
+    "left right";
+}
+
+.upload{
+    grid-area: right;
+}
+
+.search{
+    height: 2rem;
+    width: 27rem;
+}
+
+.buttonsearch{
+    height: 2rem;
+    width: 8rem;
+    box-sizing: border-box;
+    border: 0;
+    padding: 0;
+}
+
+.containerS{
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-message{
+    
 }
