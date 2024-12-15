@@ -59,7 +59,6 @@ header {
 /* Separator */
 .separator {
     margin-top: 10px;
-    width: 90%;
     height: 4px;
     background-color: #9fc0f7;
     border-radius: 2px;
