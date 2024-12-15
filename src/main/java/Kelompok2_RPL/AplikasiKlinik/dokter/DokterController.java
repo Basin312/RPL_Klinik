@@ -143,6 +143,11 @@ public class DokterController {
         if(bindingResult.hasErrors()){
             return "/dokter/konsultasi";
         }
+
+        if(session.getAttribute("id_Konsul") == null){
+            bindingResult.rejectValue("dosis", "DiagnosaBelumAda", "Tolong masukan diagnosa terlebih dahulu");
+            return "/dokter/konsultasi";
+        }
         
         //tambah obat
         this.dokterService.tambahObat(obat, dosis, (int)session.getAttribute("id_Konsul"));
@@ -225,7 +230,7 @@ public class DokterController {
     public String logout(){
         session.invalidate();
 
-        return "redirect:/dokter/";
+        return "redirect:/loginDokter";
     }
 }
 

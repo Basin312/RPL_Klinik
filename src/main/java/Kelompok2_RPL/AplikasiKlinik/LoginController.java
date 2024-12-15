@@ -50,6 +50,7 @@ public class LoginController {
             return "redirect:/LoginDokter";
         }
         session.setAttribute("Email", user);
+        session.setAttribute("id_Dokter", user.getId());
             return "redirect:/dokter";   //edit loc
     }
 
