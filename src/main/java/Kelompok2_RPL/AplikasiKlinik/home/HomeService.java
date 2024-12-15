@@ -9,7 +9,10 @@ public class HomeService {
     @Autowired
     private JdbcHomeRepository homeRepository;
 
-    public Home getNomorAntrian(int idPasien) {
-        return homeRepository.findNomorAntrian(idPasien);
+    public Home getNomorAntrian(int idPasien) {Home home = homeRepository.findNomorAntrian(idPasien);
+        if (home == null) {
+            return new Home(0);
+        }
+        return home;
     }
 }

@@ -18,11 +18,11 @@ public class PasienController {
     public String halamanPasien(HttpSession session, Model model) {
         Login user = (Login) session.getAttribute("Email");
         if (user == null) {
-            return "redirect:/loginPasien"; // Redirect if not logged in
+            return "redirect:/loginPasien";
         }
 
-        int idPasien = user.getId(); // Get id_pasien directly
-        Home home = homeService.getNomorAntrian(idPasien); // Fetch nomorantrian
+        int idPasien = user.getId();
+        Home home = homeService.getNomorAntrian(idPasien);
         model.addAttribute("home", home);
         return "pasien";
     }
