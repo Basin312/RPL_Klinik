@@ -59,6 +59,7 @@ public class JdbcDokumenPendukungRepository implements DokumenPendukungRepositor
         try{
             jdbcTemplate.update(sql, namaDokumen, pathDokumen, date, id_Pasien, id_Perawat);
         }catch(Exception e){
+            System.out.println("gagal Upload");
             e.printStackTrace();
         }
     }
