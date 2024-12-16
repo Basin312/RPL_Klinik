@@ -75,7 +75,7 @@
         <form action="/jadwal/filterDokter" method="get">
             <div class="form-group">
                 <label for="dokter">Pilih Dokter:</label>
-                <select id="dokter" name="idDokter" required>
+                <select id="dokter" name="idDokter">
                     <option value="">- Pilih Dokter -</option>
                     <option th:each="dokter : ${dokterList}" th:value="${dokter.id}" th:text="${dokter.nama}"></option>
                 </select>
@@ -86,7 +86,7 @@
         <form action="/jadwal/filterSpecialis" method="get">
             <div class="form-group">
                 <label for="specialis">Pilih Spesialis:</label>
-                <select id="specialis" name="idSpecialis" required>
+                <select id="specialis" name="idSpecialis">
                     <option value="">- Pilih Spesialis -</option>
                     <option th:each="specialis : ${specialisList}" th:value="${specialis.id}" th:text="${specialis.nama}"></option>
                 </select>
@@ -116,8 +116,11 @@
                     <td th:text="${data[0].sisaSlot}"></td>
                     <td>
                         <!--wrap pake form-->
-                        <button class="btn-book" th:if="${data[0].sisaSlot > 0}">Booking</button>
-                        <button class="btn-book" th:if="${data[0].sisaSlot == 0}" disabled>Penuh</button>
+                        <form th:action="@{/jadwal/book}" method="post">
+                            <input type="hidden" name="idJadwal" th:value="${data[0].idJadwal}">
+                            <button class="btn-book" th:if="${data[0].sisaSlot > 0}" type="submit">Booking</button>
+                            <button class="btn-book" th:if="${data[0].sisaSlot == 0}" disabled>Penuh</button>
+                        </form>
                     </td>
                 </tr>
             </tbody>
