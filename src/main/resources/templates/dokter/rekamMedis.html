@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/dokter/rekamMedis.css">
+    <link rel="stylesheet" type="text/css" href="/css/dokter/rekamMedis.css">
 </head>
 <body>
     <div class="container">
         <div class="identitas_pasien">
-            <img class="gambar_orang" src="../../static/image/Icon Orang.png" alt="Foto Pasien">
+            <img class="gambar_orang" src="/image/Icon Orang.png" alt="Foto Pasien">
             <div class="text">
-                <div class="nama_pasien">Nama: <span>Okie Hafam</span></div>
-                <div class="umur_pasien">Umur: <span>35</span></div>
-                <div class="gender_pasien">Jenis Kelamin: <span>Pria</span></div>
-                <div class="birth_pasien">Tanggal Lahir: <span>18 Oktober 2000</span></div>
+                <div class="nama_pasien">Nama: <span th:text="${nama}">Okie Hafam</span></div>
+                <div class="umur_pasien">Umur: <span th:text="${umur}">35</span></div>
+                <div class="gender_pasien">Jenis Kelamin: <span th:text="${jenis_kelamin}">Pria</span></div>
+                <div class="birth_pasien">Tanggal Lahir: <span th:text="${tanggal_lahir}">18 Oktober 2000</span></div>
             </div>
         </div>
 
@@ -31,11 +31,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="row : ${listCheckUp}">
-                                <td th:text="${row.tanggalCheckUp}">12052024</td>
-                                <td th:text="${row.beratBadan}">Okie Hafam</td>
-                                <td th:text="${row.tinggiBadan}">67</td>
-                                <td th:text="${row.tekananDarah}">Menunggu</td>
+                            <tr th:each="row : ${listCheckup}">
+                                <td th:text="${row.tanggal}">12052024</td>
+                                <td th:text="${row.berat}">Okie Hafam</td>
+                                <td th:text="${row.tinggi}">67</td>
+                                <td th:text="${row.tekanan_darah}">Menunggu</td>
                             </tr>
                         </tbody>
                     </table>
@@ -55,7 +55,7 @@
                         </thead>
                         <tbody>
                             <tr th:each="row : ${listDiagnosa}">
-                                <td th:text="${row.tanggalDiagnosa}">12052024</td>
+                                <td th:text="${row.tanggal}">12052024</td>
                                 <td th:text="${row.diagnosa}">Sakit perut</td>
                             </tr>
                         </tbody>
@@ -77,10 +77,12 @@
                         </thead>
                         <tbody>
                             <tr th:each="row : ${listDokumen}">
-                                <td th:text="${row.tanggalDokumen}">12052024</td>
-                                <td th:text="${row.namaDokumen}">Ronsen Patah Kaki</td>
+                                <td th:text="${row.tanggal}">12052024</td>
+                                <td th:text="${row.nama_dokumen}">Ronsen Patah Kaki</td>
                                 <td>
-                                    <button>Lihat</button>
+                                    <a th:href="@{/dokter/dokumenPendukung/{id_Dokumen}(id_Dokumen=${row.id_Dokumen})}">
+                                        <button>Download</button>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
@@ -102,14 +104,20 @@
                         </thead>
                         <tbody>
                             <tr th:each="row : ${listObat}">
-                                <td th:text="${row.tanggalObat}">12052024</td>
-                                <td th:text="${row.namaObat}">Obat batuk</td>
-                                <td th:text="${row.dosisObat}">Sehari 3 kali</td>
+                                <td th:text="${row.tanggal}">12052024</td>
+                                <td th:text="${row.obat}">Obat batuk</td>
+                                <td th:text="${row.dosis}">Sehari 3 kali</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
+
+        <div class="button_back">
+            <a th:href="@{/dokter/konsultasi/{id_Pasien}(id_Pasien=${id_Pasien})}">
+                <button type="button">Back</button>
+            </a>
         </div>
     </div>
 </body>
