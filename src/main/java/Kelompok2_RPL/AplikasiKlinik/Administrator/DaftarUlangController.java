@@ -66,5 +66,4 @@ public class DaftarUlangController {
 
         return "redirect:/loginAdministrator";
     }
-    
 }

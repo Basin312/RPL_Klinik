@@ -33,7 +33,7 @@ public class DaftarUlangService {
     
         boolean is_daftar = status.equalsIgnoreCase("Selesai");
         if (is_daftar) {
-            daftarUlangRepository.updateDaftarUlangWithAntrian(idPasien, detail.getIdJadwal()); // Pastikan ada `idJadwal` di DetailPasienDTO
+            daftarUlangRepository.updateDaftarUlangWithAntrian(idPasien, detail.getIdJadwal());
         } else {
             daftarUlangRepository.updateIsDaftarByIdPasien(idPasien, false);
         }
