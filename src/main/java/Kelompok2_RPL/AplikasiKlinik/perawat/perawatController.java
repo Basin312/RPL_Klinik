@@ -103,6 +103,7 @@ public class perawatController {
     public String uploadFile(
             @RequestParam("file") MultipartFile file, 
             @RequestParam(value = "options", required = false) Integer options, // Value from datalist
+            @RequestParam("namafile") String nama,
             Model model,
             RedirectAttributes redirectAttributes) {
 
@@ -139,10 +140,10 @@ public class perawatController {
             // System.out.println("call repository");
             
             //get id user
-            // Login user = (Login)session.getAttribute("Email");
-            // int id_Perawat = user.getId();
+            Login user = (Login)session.getAttribute("Email");
+            int id_Perawat = user.getId();
             // jdbcDokumen.addDokumenPendukung(filename, "/dokumen"+filename, LocalDate.now(), options, id_Perawat);
-            jdbcDokumen.addDokumenPendukung(filename, "/dokumen/"+filename, LocalDate.now(), options, 1);
+            jdbcDokumen.addDokumenPendukung(nama, "/dokumen/"+filename, LocalDate.now(), options, id_Perawat);
             
             Pasien pasien = jdbc.findById(options).get();
             // Return success response including datalist input

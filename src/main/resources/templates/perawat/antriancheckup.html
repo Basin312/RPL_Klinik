@@ -83,8 +83,9 @@
                         id="options" 
                         name="options"
                         class="options"
-                        placeholder="Type here..." 
+                        placeholder="masukan pasien" 
                         onkeyup="filterOptions()"
+                        
                         />
                     <datalist id="data-options">
                         <option th:each="item : ${list}" 
@@ -93,6 +94,7 @@
                             Option Name
                         </option>
                     </datalist>
+                        <input type="text" name="namafile" class="options" placeholder="masukan nama file" required>
                     <div class="inputUpload">
                         <input type="file" name="file" class="file">
                     </div>
