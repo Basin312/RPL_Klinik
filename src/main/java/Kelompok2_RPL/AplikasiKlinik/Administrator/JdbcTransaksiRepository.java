@@ -128,8 +128,4 @@ public class JdbcTransaksiRepository implements TransaksiRepository{
             isReadOnly
         );
     }
-
-    
-
-    
 }

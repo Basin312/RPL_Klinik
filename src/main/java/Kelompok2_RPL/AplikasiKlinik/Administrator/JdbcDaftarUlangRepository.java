@@ -46,26 +46,46 @@ public class JdbcDaftarUlangRepository implements DaftarUlangRepository {
 
     private final String SELECT_DETAIL_PASIEN =
     """
-        SELECT p.id_Pasien, p.nama, pd.tanggal_pendaftaran AS tanggalPendaftaran, p.no_hp AS noHp, p.jenis_kelamin AS jenisKelamin, d.nama AS namaDokter, j.jam AS jamKonsul,
-        CASE pd.is_Daftar 
+        SELECT 
+            p.id_Pasien, 
+            p.nama, 
+            pd.tanggal_pendaftaran AS tanggalPendaftaran, 
+            p.no_hp AS noHp, 
+            p.jenis_kelamin AS jenisKelamin, 
+            d.nama AS namaDokter, 
+            j.jam AS jamKonsul,
+            CASE pd.is_Daftar 
                 WHEN false THEN 'Menunggu' 
                 ELSE 'Selesai'
-        END AS status 
+            END AS status,
+            pd.nomor_antrian AS nomorAntrian,
+            j.id_Dokter,
+            pd.id_Jadwal
         FROM Pasien p
         JOIN Pendaftaran pd ON p.id_Pasien = pd.id_Pasien
         JOIN Jadwal j ON pd.id_Jadwal = j.id_Jadwal
         JOIN Dokter d ON j.id_Dokter = d.id_Dokter
         WHERE p.id_Pasien = ?
         ORDER BY pd.tanggal_pendaftaran DESC
-        LIMIT 1
+        LIMIT 1;
     """;
 
-
-    private final String UPDATE_IS_DAFTAR = 
+    private final String UPDATE_ANTRIAN =
     """
         UPDATE Pendaftaran
-        SET is_daftar = ?
-        WHERE id_pasien = ?
+        SET is_Daftar = TRUE,
+            nomor_antrian = (
+                SELECT COALESCE(MAX(p.nomor_antrian), 0) + 1
+                FROM Pendaftaran p
+                JOIN Jadwal j ON p.id_Jadwal = j.id_Jadwal
+                WHERE p.tanggal_pendaftaran = CURRENT_DATE
+                AND j.id_Dokter = (SELECT j2.id_Dokter 
+                                    FROM Jadwal j2 
+                                    WHERE j2.id_Jadwal = ?)
+            )
+        WHERE id_Pasien = ?
+        AND id_Jadwal = ?
+        AND is_Daftar = FALSE;
     """;
 
     @Override
@@ -85,7 +105,12 @@ public class JdbcDaftarUlangRepository implements DaftarUlangRepository {
 
     @Override
     public void updateIsDaftarByIdPasien(int idPasien, boolean is_daftar) {
-        jdbcTemplate.update(UPDATE_IS_DAFTAR, is_daftar, idPasien);
+        jdbcTemplate.update(UPDATE_ANTRIAN, is_daftar, idPasien);
+    }
+
+    @Override
+    public void updateDaftarUlangWithAntrian(int idPasien, int idJadwal) {
+        jdbcTemplate.update(UPDATE_ANTRIAN, idJadwal, idPasien, idJadwal);
     }
 
     private PasienStatusDTO mapRowToPasienStatusDTO(ResultSet resultSet, int rowNum) throws SQLException {
@@ -107,7 +132,10 @@ public class JdbcDaftarUlangRepository implements DaftarUlangRepository {
             resultSet.getString("jenisKelamin"),
             resultSet.getString("namaDokter"),
             resultSet.getString("jamKonsul"),
-            isReadOnly
+            isReadOnly,
+            resultSet.getInt("id_Dokter"),
+            resultSet.getInt("id_Jadwal"),
+            resultSet.getInt("nomorAntrian")
         );
     }
 }
