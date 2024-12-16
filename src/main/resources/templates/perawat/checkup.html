@@ -15,33 +15,55 @@
             </span>
 
             <span class="logout_icon">
-                <input type="image" src="/image/Icon Logout.png">
-            </span>
+                <a href="/logout">
+                    <img src="/image/Icon Logout.png" alt="Logout" />
+                </a>
         </header>
-        <div name="maindata" >
-            <p class="label1">Nama :</p>
-            <p th:text="${nama}" class="out1"></p>
-            <p class="label1">gender</p>
-            <p th:text="${gender}" class="out1"></p>
-            <p class="label1">umur</p>
-            <p th:text="${umur}" class="out1"></p>
-            <p>Tanggal</p>
-            <p th:text="${tanggal}"></p>
-            <form action="/konfirm" method="post">
-                <p>berat</p>
-                <input type="number" step="0.01" placeholder="Enter a decimal number" name="berat" id="">
-                <p>tinggi</p>
-                <input type="number" step="0.01" placeholder="Enter a decimal number" name="tinggi">
-                <p>tekanan darah</p>
-                <input type="text" name="darah"> <!-- Fixed here -->
-                <input type="hidden" th:value="${tanggal}" name="tanggal">
-                <input type="hidden" th:value="${id}" name="id">
-                <button type="submit">konfirm</button>
-            </form>
-
+        <div name="maindata" class="maindata">
+            <div class="objectdata">
+                <div class="data">
+                    <p class="label1">Nama :</p>
+                    <p th:text="${nama}" class="out1"></p>
+                </div>
+                <div class="data">
+                    <p class="label1">Umur :</p>
+                    <p th:text="${umur}" class="out1"></p>
+                </div>
+                <div class="data">
+                    <p class="label1">Jenis Kelamin :</p>
+                    <p th:text="${gender}" class="out1"></p>
+                </div>
+                <div class="data">
+                    <p class="label1">Tanggal :</p>
+                    <p th:text="${tanggal}" class="out1"></p>
+                </div>
+            </div>
             <div>
-                <form action="/perawat">
-                    <button type="submit">back</button>
+                <form action="/konfirm" method="post" class="formmodel">
+                    <div class="formcheckuplayout">
+                        <div class="insertCheckup">
+                            <p>berat</p>
+                            <input type="number" step="0.01" placeholder="Enter a decimal number" name="berat" id="" required>
+                        </div>
+                        <div class="insertCheckup">
+                            <p>tinggi</p>
+                            <input type="number" step="0.01" placeholder="Enter a decimal number" name="tinggi" required>
+                        </div>
+                        <div class="insertCheckup">
+                            <p>tekanan darah</p>
+                        <input type="text" name="darah" placeholder=" gunakan format 'Systolic pressure/Diastolic pressure'" required>
+                        </div>
+                    </div>
+                   
+                     <!-- Fixed here -->
+                    <input type="hidden" th:value="${tanggal}" name="tanggal">
+                    <input type="hidden" th:value="${id}" name="id">
+                    <button type="submit" class="buttonselesai">selesai</button>
+                </form>
+            </div>
+            <div class="objectbutton">
+                <form action="/perawat" >
+                    <button type="submit" class="backbutton">back</button>
                 </form>
             </div>
             

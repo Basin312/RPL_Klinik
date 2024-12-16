@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +43,7 @@ public class perawatController {
    
     
     @GetMapping("/perawat")
-    public String homePagePerawat(Model model ){
+    public String homePagePerawat(Model model){
         List<CheckUp> checkups = jdbc.findAll();
         List<Pasien> pasiens = jdbc.findPasiens();
         System.out.println( "data :"+checkups.isEmpty());
@@ -106,37 +107,46 @@ public class perawatController {
             RedirectAttributes redirectAttributes) {
 
         // Check if the file is empty
-        if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "No file uploaded. Please select a file.");
+        if(file.isEmpty() && options==null){
+            redirectAttributes.addFlashAttribute("error", "belum ada data yang  dimasukan");
+            return "redirect:/perawat";
+        }else if (file.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "ga ada file yang akan uploaded. Silahkan masukan file.");
             return "redirect:/perawat";  // Redirect to the page with the form
-        }
-
-        if(options == null){
-            redirectAttributes.addFlashAttribute("error", "please insert pasien");
+        }else if(options == null){
+            redirectAttributes.addFlashAttribute("error", "ga ada data pasien untuk dimasukan");
             return "redirect:/perawat";
         }
 
         try {
             // Ensure the "dokumen" folder exists
+            // System.out.println("create path");
             Path uploadPath = Paths.get(UPLOAD_DIR);
             Files.createDirectories(uploadPath);
 
+            // System.out.println("get filename");
             // Generate a unique filename to avoid overwriting files
-            String filename = file.getOriginalFilename();
+            String filename =  UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
 
+            // System.out.println("set destination");
             // Resolve the file path in "static/dokumen" folder
             Path destFile = uploadPath.resolve(filename);
 
+            // System.out.println("try save file");
             // Save the file to the target path
             Files.copy(file.getInputStream(), destFile);
 
-            // Login user = (Login)session.getAttribute("Email");
-            // int id_Perawat = user.getId();
-            // jdbcDokumen.addDokumenPendukung(filename, "/dokumen"+filename, LocalDate.now(), options, id_Perawat);
-            jdbcDokumen.addDokumenPendukung(filename, "/dokumen/"+filename, LocalDate.now(), options, 1);
+            // System.out.println("call repository");
+            
+            //get id user
+            Login user = (Login)session.getAttribute("Email");
+            int id_Perawat = user.getId();
+            jdbcDokumen.addDokumenPendukung(filename, "/dokumen"+filename, LocalDate.now(), options, id_Perawat);
+            // jdbcDokumen.addDokumenPendukung(filename, "/dokumen/"+filename, LocalDate.now(), options, 1);
+            Pasien pasien = jdbc.findById(options).get();
             // Return success response including datalist input
             redirectAttributes.addFlashAttribute("success", "File uploaded successfully: " + filename);
-            redirectAttributes.addFlashAttribute("selectedOption", options); // Passing selected option to be displayed
+            redirectAttributes.addFlashAttribute("selectedOption", pasien.getNama()); // Passing selected option to be displayed
 
         } catch (IOException e) {
             // Return error response if file upload fails
