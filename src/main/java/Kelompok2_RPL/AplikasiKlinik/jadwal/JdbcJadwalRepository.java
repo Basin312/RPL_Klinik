@@ -37,7 +37,7 @@ public class JdbcJadwalRepository {
         return new Jadwal(
             resultSet.getString("nama"),
             resultSet.getString("nama_specialis"),
-            resultSet.getString("hari"),
+            resultSet.getInt("id_hari"),
             resultSet.getString("jam"),
             resultSet.getInt("limitpasien")
         );

@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 public class Jadwal {
     private String namaDokter;
     private String namaSpecialis;
-    private String hari;
+    private int idHari;
     private String jam;
     private int sisaSlot;
 }
+
