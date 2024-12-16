@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class DaftarUlangController {
     
     @Autowired
     private DaftarUlangService daftarUlangService;
+
+    @Autowired
+    private HttpSession session;
 
     @GetMapping("/administrator/daftarulang")
     public String daftarUlang(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
@@ -44,6 +49,13 @@ public class DaftarUlangController {
     public String updateStatus(@RequestParam("id") int id, @RequestParam("status") String status) {
         daftarUlangService.updatePasienStatus(id, status);
         return "redirect:/administrator/daftarulang";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        session.invalidate();
+
+        return "redirect:/loginAdministrator";
     }
     
 }
