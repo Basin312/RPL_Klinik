@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaksi</title>
+    <link rel="stylesheet" href="/Administrator/css/transaksi.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <a href="/administrator/home">
+                    <img src="/Administrator/image/klinik.jpg" alt="Logo" class="logo-image">
+                </a>
+            </div>
+            <div class="title">Poliklinik Sehat Selalu</div>
+            <div class="logout">
+                <a href="/logout">
+                    <img src="/Administrator/image/logout.jpg" alt="Logout" class="logout-icon">
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <div class="welcome-message">
+                <h1>Welcome, Administrator</h1>
+            </div>
+            <div class="separator"></div>
+
+            <!-- Form Registrasi Ulang -->
+            <div class="form-container">
+                <form action="/administrator/transaksi" method="GET">
+                    <input type="text" name="keyword" placeholder="Cari pasien..." class="search-bar" th:value="${keyword}">
+                    <button class="search-button">Cari</button>
+                </form>
+            </div>
+            <!-- Tabel Daftar Pasien -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama Pasien</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Looping data pasien menggunakan Thymeleaf -->
+                        <tr th:each="pasien : ${pasienList}"
+                            th:onclick="|window.location.href='/administrator/detailTransaksi?id=' + ${pasien.idPasien}|">
+                            <td th:text="${pasien.nama}"></td>
+                            <td th:text="${pasien.status}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer></footer>
+    </div>
+</body>
+</html>

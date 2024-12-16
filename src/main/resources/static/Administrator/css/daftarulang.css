@@ -108,9 +108,7 @@ main {
     cursor: pointer;
 }
     
-.register-btn:hover { 
-    background-color: #0056b3; 
-}
+
     
 .table-container { 
     width: 80%; 
@@ -155,6 +153,17 @@ tbody td {
 tbody tr:hover { 
     background-color: #f1f1f1; 
 }
+
+.status-column {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+
+.status-column:hover {
+    color: darkblue;
+}
+
     
 footer { 
     width: 100%; 

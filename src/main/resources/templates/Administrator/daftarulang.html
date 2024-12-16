@@ -32,8 +32,10 @@
 
             <!-- Form Registrasi Ulang -->
             <div class="form-container">
-                <input type="text" placeholder="Cari pasien..." class="search-bar">
-                <button class="search-button">Cari</button>
+                <form action="/administrator/daftarulang" method="GET">
+                    <input type="text" name="keyword" placeholder="Cari pasien..." class="search-bar" th:value="${keyword}">
+                    <button class="search-button">Cari</button>
+                </form>
             </div>
 
             <!-- Tabel Daftar Pasien -->
@@ -47,7 +49,8 @@
                     </thead>
                     <tbody>
                         <!-- Looping data pasien menggunakan Thymeleaf -->
-                        <tr th:each="pasien : ${pasienList}">
+                        <tr th:each="pasien : ${pasienList}"
+                            th:onclick="|window.location.href='/administrator/detailPasien?id=' + ${pasien.idPasien}|">
                             <td th:text="${pasien.nama}"></td>
                             <td th:text="${pasien.status}"></td>
                         </tr>

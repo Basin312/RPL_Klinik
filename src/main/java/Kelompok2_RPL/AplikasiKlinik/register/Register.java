@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Register {
     @NotNull
-    private Integer id_Pasien;
-    @NotNull
     private String nama;
     @NotNull
     private String email;
