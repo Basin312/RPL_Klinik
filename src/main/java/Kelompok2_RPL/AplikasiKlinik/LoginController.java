@@ -50,7 +50,8 @@ public class LoginController {
             return "redirect:/LoginDokter";
         }
         session.setAttribute("Email", user);
-            return "redirect:/dokter";   //edit loc
+        session.setAttribute("id_Dokter", user.getId());
+            return "redirect:/dokter/home";   //edit loc
     }
 
     @GetMapping("/loginPerawat")
@@ -93,5 +94,7 @@ public class LoginController {
         session.setAttribute("Email", user);
             return "redirect:/admin";   //edit loc
     }
+
+    
 }
 

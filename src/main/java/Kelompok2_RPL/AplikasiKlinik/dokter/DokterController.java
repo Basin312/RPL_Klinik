@@ -143,6 +143,11 @@ public class DokterController {
         if(bindingResult.hasErrors()){
             return "/dokter/konsultasi";
         }
+
+        if(session.getAttribute("id_Konsul") == null){
+            bindingResult.rejectValue("dosis", "DiagnosaBelumAda", "Tolong masukan diagnosa terlebih dahulu");
+            return "/dokter/konsultasi";
+        }
         
         //tambah obat
         this.dokterService.tambahObat(obat, dosis, (int)session.getAttribute("id_Konsul"));
@@ -207,8 +212,12 @@ public class DokterController {
         }
     }
 
-    @GetMapping("/simpanKonsultasi")
-    public String simpanKonsultasi(){
+    @GetMapping("/simpanKonsultasi/{id_Pasien}")
+    public String simpanKonsultasi(@PathVariable("id_Pasien") int id_Pasien){
+        if(session.getAttribute("id_Konsul") == null){
+            return "redirect:/dokter/konsultasi/" + id_Pasien;
+        }
+        
         //set is_Konsul jadi true
         this.dokterService.setIsKonsul((int) session.getAttribute("id_Pendaftaran"));
 
@@ -225,7 +234,7 @@ public class DokterController {
     public String logout(){
         session.invalidate();
 
-        return "redirect:/dokter/";
+        return "redirect:/loginDokter";
     }
 }
 

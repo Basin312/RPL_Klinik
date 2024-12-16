@@ -1,9 +1,367 @@
-html{
+body{
     margin: 0%;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
 }
 
-div{
+.navbar{
+    margin: 0%;
     background-color: aquamarine;
     height: 45rem;
     width: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    font-size: 1.5em;
+    background-color:#407CE2;
+    
+}
+
+.home_logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.home_logo input[type="image"] {
+    width: 35px;
+    height: 35px;
+}
+
+.logout_icon img {
+    width: 30px;
+    height: 30px;
+}
+
+.bg_image{
+    height: 100vh;
+    width: 100%;
+    background-image: url("../../image/image.jpg");
+    background-size: cover;
+    background-position: center;
+    position:  absolute;
+}
+
+.head{
+    background-color:#2E3282;
+    width: 36rem;
+    height: 50px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 50px;
+    grid-template-areas: 
+    "nama tanggal isi";
+    align-items: center; /* Centers content vertically */
+    justify-items: center; /* Centers content horizontally */
+}
+
+.isi{
+    background-color:#D9D9D9;
+    width: 35rem;
+    height: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 50px;
+    grid-template-areas: 
+    "isinama isitanggal button";
+    border-width: 1px;
+    border-color: black;
+    align-items: center; /* Centers content vertically */
+    justify-items: center; /* Centers content horizontally */
+}
+
+.filter{
+    display: flex;
+}
+.button{
+    height: 50px;
+    width: 18rem;
+    font-size: 30px;
+background-color: #00A1FF;
+}
+
+.container{
+    width: 36rem;
+    height: 31rem;
+    background-color: grey;
+    margin-left: 20px;
+    margin-top: 20px;
+    grid-area: left;
+    
+}
+.footer{
+    width: 100%;
+    height: 4rem;
+    background-color: #2E3282;
+    position: absolute;
+    bottom: 0%;
+}
+
+.content{
+    display: grid;
+    grid-template-areas: 
+    "left right";
+    gap: 20px;
+}
+
+.isicontent{
+    height: 22rem;
+    overflow: scroll;
+}
+
+
+.search{
+    height: 2rem;
+    width: 26rem;
+}
+
+.buttonsearch{
+    height: 2rem;
+    width: 8rem;
+    box-sizing: border-box;
+    border: 0;
+    padding: 0;
+}
+
+.containerS{
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-message{
+    height: auto;
+    width: 32rem;
+    background-color:#D9D9D9;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-areas: 
+    "error pesan";
+    border: 5px solid black; /* Border hitam 2px */
+    justify-items: center;
+    gap: 20px;
+}
+
+.error-message p:nth-of-type(1){
+    font-size: 20px;
+    margin-left: 20px;
+    grid-area: error;
+    
+}
+.error-message p:nth-of-type(2){
+    font-size: 25px;
+    grid-area: pesan;
+}
+
+.success-message{
+    height: auto;
+    width: 32rem;
+    background-color: #D9D9D9;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-areas: 
+    "succes "
+    "option";
+    border: 5px solid black; /* Border hitam 2px */
+    justify-items: center;
+    gap: 20px;
+}
+
+.success-message p:nth-of-type(1){
+   color: green;
+   font-weight: bold;
+   font-size: 25px;
+   grid-area: succes;
+}
+
+.success-message p:nth-of-type(2){
+    color: black;
+    font-size: 20px;
+    grid-area: option;
+ }
+
+.isiHead{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.isiHead:nth-of-type(1){
+    grid-area: nama;
+}
+
+.isiHead:nth-of-type(2){
+    grid-area: tanggal;
+}
+
+.isiHead:nth-of-type(3){
+    grid-area: isi;
+}
+
+.isinama{
+    grid-area: isinama;
+    font-size: 26px;
+}
+
+.isitanggal{
+    grid-area: isitanggal;
+    font-size: 26px;
+}   
+
+.buttonIsi{
+    grid-area: button;
+    background-color: #00A1FF;
+    height: 2rem;
+    width: 8rem;
+    color: white;
+    font-size: 20px;
+}
+
+.upload{
+    grid-area: right;
+    display: grid;
+    grid-template-areas: 
+    "judul"
+    "form"
+    "message";
+    grid-template-rows: 6rem 11rem 17rem;
+}
+
+.formUpload{
+    grid-area: form;
+}
+
+.messages{
+    grid-area: message;
+}
+
+.upload .judulUpload{
+    font-weight: bold;
+    font-size: 50px;
+    color: white;
+    grid-area: judul;
+    margin-top: 14px;
+    margin-bottom: 0;
+}
+
+.upload .options{
+    height: 3rem;
+    width: 32rem;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.upload .file{
+    height: 3rem;
+    width: 10rem;
+}
+
+.uploadbutton{
+    height: 2rem;
+    width: 8rem;
+    background-color: #00A1FF;
+    color: white;
+    font-size: 20px;
+}
+
+.backbutton{
+    height: 3rem;
+    width: 36rem;
+    background-color: #00A1FF;
+    color: white;
+    font-size: 20px;
+}
+
+.data{
+    display: grid;
+    grid-template-areas: "type values";
+    grid-template-columns: 15rem 20rem;
+}   
+
+.data .label1{
+    grid-area: type ;
+    font-size: 30px;
+    margin: 0%;
+}
+
+.data .out1{
+    grid: values;
+    background-color: #D9D9D9;
+    font-size: 30px;
+    margin: 3px;
+}
+.maindata{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 36px;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonselesai{
+    height: 3rem;
+    width: 36rem;
+    background-color: #00A1FF;
+    color: white;
+    font-size: 20px;
+    
+}
+
+.formmodel{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formcheckuplayout{
+    height:13rem ;
+    width: 36rem;
+    display: grid;
+    gap: 5px;
+    
+}
+
+.insertCheckup{
+    display: flex;
+    width: 36rem;
+    border: 2px solid black;
+    height: 3rem;
+}
+
+.insertCheckup p{
+    height: 3rem;
+    width: 7rem;
+    background-color: #00A1FF;
+    color: #ffffff;
+    margin: 0px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.insertCheckup input{
+    height: 43px;
+    width: 29rem;
+}
+
+
+
+.objectbutton{
+    grid-area: back;
+}
+
+.objectdata{
+    grid-area: data;
 }
