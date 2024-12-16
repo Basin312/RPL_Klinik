@@ -49,8 +49,10 @@ public class LoginController {
         if(user==null){
             return "redirect:/LoginDokter";
         }
+
         session.setAttribute("User", user);
             return "redirect:/dokter/home";   //edit loc
+
     }
 
     @GetMapping("/loginPerawat")
@@ -94,10 +96,12 @@ public class LoginController {
         session.setAttribute("Email", user);
             return "redirect:/admin";   //edit loc
     }
+
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("username");
         return "redirect:/";
     }
+
 }
 

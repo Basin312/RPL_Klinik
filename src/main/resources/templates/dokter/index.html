@@ -11,19 +11,23 @@
         <div class="bg_gradient">
             <div class="container">
                 <header>
-                    <span class="home_logo">
-                        <input type="image" src="/image/Logo Klinik.png">
-                        Poliklinik Sehat Selalu
-                    </span>
-                    <span class="logout_icon">
-                        <input type="image" src="/image/Icon Logout.png">
-                    </span>
+                    <a th:href="@{/dokter/home}">
+                        <span class="home_logo">
+                            <input type="image" src="/image/Logo Klinik.png">
+                        </span>
+                    </a>
+                    Poliklinik Sehat Selalu
+                    <a th:href="@{/dokter/logout}">
+                        <span class="logout_icon">
+                            <input type="image" src="/image/Icon Logout.png">
+                        </span>
+                    </a>
                 </header>
                 
-                <div class="text_antrian" th:text="${nomorAntrian != null ? 'No. Antrian' : 'Belum Memiliki Antrian'}">No. Antrian</div>
-                <div class="no_antrian" th:text="${nomorAntrian}">67</div>
+                <div class="text_antrian" th:text="${nomor_antrian != null ? 'No. Antrian' : 'Belum Memiliki Antrian'}">No. Antrian</div>
+                <div class="no_antrian" th:text="${nomor_antrian}">67</div>
 
-                <form method="get" th:action="@{/dokter/}">
+                <form method="get" th:action="@{/dokter/home}">
                     <input type="text" name="filter" th:value="${filter}" placeholder="Cari berdasarkan nama">
                 </form>
                 
@@ -41,10 +45,12 @@
                             <tbody>
                                 <tr th:each="row : ${listAntrian}">
                                     <td th:text="${row.nama}">Okie Hafam</td>
-                                    <td th:text="${row.nomorAntrian}">67</td>
+                                    <td th:text="${row.nomor_antrian}">67</td>
                                     <td th:text="${row.is_Daftar}">Menunggu</td>
                                     <td>
-                                        <button class="konsul_button" disabled>Konsultasi</button>
+                                        <a th:href="@{/dokter/konsultasi/{id_Pasien}(id_Pasien=${row.id_Pasien}, id_Pendaftaran=${row.id_Pendaftaran})}">
+                                            <button class="konsul_button">Konsultasi</button>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -55,7 +61,7 @@
         </div>
     </div>
 
-    <script defer>
+    <!-- <script defer>
         (function (){
             var buttons = document.getElementsByClassName("konsul_button")
             
@@ -68,6 +74,6 @@
                 }
             }
         })();
-    </script>
+    </script> -->
 </body>
 </html>

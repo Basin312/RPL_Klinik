@@ -1,5 +1,6 @@
 package Kelompok2_RPL.AplikasiKlinik.pasien;
 
+
 import java.util.Date;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -18,11 +19,13 @@ public class Pasien {
     @Size(min=4, max=60)
     private String password;
     @NotNull
-    private Date tanggalLahir;
+    private Date tanggal_lahir;
     @NotNull
     private String jenis_kelamin;
     @NotNull
     private String no_hp;
     @NotNull
     private String alamat;
+
+   
 }

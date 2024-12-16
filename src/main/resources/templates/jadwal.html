@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Dokter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background-color: #f8f8f8;
+        }
+        .btn-book {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-book:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Jadwal Dokter</h1>
+        </div>
+
+        <!-- Form untuk memilih dokter dan spesialis -->
+        <form action="/jadwal/filterDokter" method="get">
+            <div class="form-group">
+                <label for="dokter">Pilih Dokter:</label>
+                <select id="dokter" name="idDokter" required>
+                    <option value="">- Pilih Dokter -</option>
+                    <option th:each="dokter : ${dokterList}" th:value="${dokter.id}" th:text="${dokter.nama}"></option>
+                </select>
+            </div>
+            <button class="btn-book" type="submit">Search</button>
+        </form>
+
+        <form action="/jadwal/filterSpecialis" method="get">
+            <div class="form-group">
+                <label for="specialis">Pilih Spesialis:</label>
+                <select id="specialis" name="idSpecialis" required>
+                    <option value="">- Pilih Spesialis -</option>
+                    <option th:each="specialis : ${specialisList}" th:value="${specialis.id}" th:text="${specialis.nama}"></option>
+                </select>
+            </div>
+            <button class="btn-book" type="submit">Search</button>
+        </form>
+
+
+        <!-- Tabel jadwal dokter -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama Dokter</th>
+                    <th>Spesialis</th>
+                    <th>Tanggal</th>
+                    <th>Jam</th>
+                    <th>Sisa Slot</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="data : ${jadwalWithDates}">
+                    <td th:text="${data[0].namaDokter}"></td>
+                    <td th:text="${data[0].namaSpecialis}"></td>
+                    <td th:text="${#temporals.format(data[1], 'EEEE, yyyy-MM-dd')}"></td>
+                    <td th:text="${data[0].jam}"></td>
+                    <td th:text="${data[0].sisaSlot}"></td>
+                    <td>
+                        <!--wrap pake form-->
+                        <button class="btn-book" th:if="${data[0].sisaSlot > 0}">Booking</button>
+                        <button class="btn-book" th:if="${data[0].sisaSlot == 0}" disabled>Penuh</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
