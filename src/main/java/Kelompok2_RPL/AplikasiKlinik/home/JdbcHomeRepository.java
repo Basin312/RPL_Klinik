@@ -12,7 +12,7 @@ public class JdbcHomeRepository {
     private JdbcTemplate jdbcTemplate;
 
     public Home findNomorAntrian(int idPasien) {
-        String query = "SELECT nomorantrian FROM pendaftaran WHERE id_pasien = ?";
+        String query = "SELECT nomor_antrian FROM pendaftaran WHERE id_pasien = ?";
         try {
             int nomorAntrian = jdbcTemplate.queryForObject(query, Integer.class, idPasien);
             return new Home(nomorAntrian);

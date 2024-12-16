@@ -21,10 +21,10 @@ public class JdbcJadwalRepository {
                             "SELECT * " +
                             "FROM hari " +
                             "JOIN ( " +
-                            "    SELECT id_jadwal, jam, id_hari, id_dokter, nama, status, specialis.id_specialis, limitpasien, nama_specialis, harga " +
+                            "    SELECT id_jadwal, jam, id_hari, id_dokter, nama, status, specialis.id_specialis, limit_pasien, nama_specialis, harga " +
                             "    FROM specialis " +
                             "    JOIN ( " +
-                            "        SELECT jam, id_jadwal, jadwal.id_dokter, id_hari, limitpasien, nama, status, id_specialis " +
+                            "        SELECT jam, id_jadwal, jadwal.id_dokter, id_hari, limit_pasien, nama, status, id_specialis " +
                             "        FROM jadwal " +
                             "        JOIN dokter ON dokter.id_dokter = jadwal.id_dokter " +
                             "    ) AS data1 ON data1.id_specialis = specialis.id_specialis " +
@@ -39,7 +39,7 @@ public class JdbcJadwalRepository {
             resultSet.getString("nama_specialis"),
             resultSet.getInt("id_hari"),
             resultSet.getString("jam"),
-            resultSet.getInt("limitpasien")
+            resultSet.getInt("limit_pasien")
         );
     }
 
@@ -75,10 +75,10 @@ public class JdbcJadwalRepository {
         "SELECT * " +
         "FROM hari " +
         "JOIN ( " +
-        "    SELECT id_jadwal, jam, id_hari, id_dokter, nama, status, specialis.id_specialis, limitpasien, nama_specialis, harga " +
+        "    SELECT id_jadwal, jam, id_hari, id_dokter, nama, status, specialis.id_specialis, limit_pasien, nama_specialis, harga " +
         "    FROM specialis " +
         "    JOIN ( " +
-        "        SELECT jam, id_jadwal, jadwal.id_dokter, id_hari, limitpasien, nama, status, id_specialis " +
+        "        SELECT jam, id_jadwal, jadwal.id_dokter, id_hari, limit_pasien, nama, status, id_specialis " +
         "        FROM jadwal " +
         "        JOIN dokter ON dokter.id_dokter = jadwal.id_dokter " +
         "    ) AS data1 ON data1.id_specialis = specialis.id_specialis " +
@@ -93,10 +93,10 @@ public class JdbcJadwalRepository {
         "SELECT * " +
         "FROM hari " +
         "JOIN ( " +
-        "    SELECT id_jadwal, jam, id_hari, id_dokter, nama, status, specialis.id_specialis, limitpasien, nama_specialis, harga " +
+        "    SELECT id_jadwal, jam, id_hari, id_dokter, nama, status, specialis.id_specialis, limit_pasien, nama_specialis, harga " +
         "    FROM specialis " +
         "    JOIN ( " +
-        "        SELECT jam, id_jadwal, jadwal.id_dokter, id_hari, limitpasien, nama, status, id_specialis " +
+        "        SELECT jam, id_jadwal, jadwal.id_dokter, id_hari, limit_pasien, nama, status, id_specialis " +
         "        FROM jadwal " +
         "        JOIN dokter ON dokter.id_dokter = jadwal.id_dokter " +
         "    ) AS data1 ON data1.id_specialis = specialis.id_specialis " +

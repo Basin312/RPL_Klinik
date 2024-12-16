@@ -75,7 +75,7 @@
         <form action="/jadwal/filterDokter" method="get">
             <div class="form-group">
                 <label for="dokter">Pilih Dokter:</label>
-                <select id="dokter" name="idDokter">
+                <select id="dokter" name="idDokter" required>
                     <option value="">- Pilih Dokter -</option>
                     <option th:each="dokter : ${dokterList}" th:value="${dokter.id}" th:text="${dokter.nama}"></option>
                 </select>
@@ -86,7 +86,7 @@
         <form action="/jadwal/filterSpecialis" method="get">
             <div class="form-group">
                 <label for="specialis">Pilih Spesialis:</label>
-                <select id="specialis" name="idSpecialis">
+                <select id="specialis" name="idSpecialis" required>
                     <option value="">- Pilih Spesialis -</option>
                     <option th:each="specialis : ${specialisList}" th:value="${specialis.id}" th:text="${specialis.nama}"></option>
                 </select>
