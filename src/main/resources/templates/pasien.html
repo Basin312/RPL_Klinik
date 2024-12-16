@@ -64,9 +64,11 @@
                 padding-left: 10px;
                 padding-right: 10px;
                 text-align: center;
+                overflow: auto;
             }
             .queue h1{
                 font-size: 100px;
+                
             }
             .main{
                 grid-area: main;
@@ -79,6 +81,28 @@
                 justify-content: center;
                 align-items: center;
                 text-align: center;
+            }
+            .pendaftaran{
+                display: grid;
+                grid-template-areas: 
+                "dokter hari keterangan";
+                border: 1px solid white;
+            }
+
+            .pendaftaran p:nth-of-type(1){
+                grid-area: dokter;
+            }
+            
+            .pendaftaran p:nth-of-type(2){
+                grid-area: hari;
+            }
+
+            .pendaftaran p:nth-of-type(3){
+                grid-area: keterangan;
+            }
+
+            .pendaftaran p:nth-of-type(4){
+                grid-area: keterangan;
             }
         </style>
         <link rel="stylesheet" href="css/styles.css">
@@ -107,10 +131,14 @@
                 </div>
 
                 <div class="queue">
-                    <h2>Nomor Antrian Pasien</h2>
-                    <h1 th:if="${home != null}" th:text="${home.nomorantrian}"></h1>
-                    <h1 th:if="${home == null}">-</h1>
-                    <h3>Konsultasi dengan dokter</h3>
+                    <div th:each="list : ${row}">
+                        <div class="pendaftaran">
+                            <p th:text="${list.namaDokter}"></p>
+                            <p th:text="${list.hari}"></p>
+                            <p th:if="${list.isDaftar}" th:text="'nomor antrian :'+${list.nomor_antrian}"></p>
+                            <p th:unless="${list.isDaftar}" >belom daftar ulang</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="main">
