@@ -70,7 +70,6 @@ public class JdbcDaftarUlangRepository implements DaftarUlangRepository {
         LIMIT 1;
     """;
 
-
     private final String UPDATE_ANTRIAN =
     """
         UPDATE Pendaftaran
