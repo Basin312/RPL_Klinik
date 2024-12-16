@@ -59,11 +59,4 @@ public class DaftarUlangController {
         daftarUlangService.updatePasienStatus(id, status);
         return "redirect:/administrator/daftarulang";
     }
-
-    @GetMapping("/logout")
-    public String logout(){
-        session.invalidate();
-
-        return "redirect:/loginAdministrator";
-    }
 }

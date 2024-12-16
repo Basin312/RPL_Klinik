@@ -113,7 +113,7 @@ public class LoginController {
     
     @GetMapping("/logout")
     public String logout(){
-        httpSession.removeAttribute("User");
+        httpSession.invalidate();
         return "redirect:/";
     }
 
