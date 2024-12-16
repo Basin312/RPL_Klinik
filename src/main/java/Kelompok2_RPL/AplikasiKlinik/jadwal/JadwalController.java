@@ -15,6 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import Kelompok2_RPL.AplikasiKlinik.User.LoginPage.Login;
 import jakarta.servlet.http.HttpSession;
 
+import Kelompok2_RPL.AplikasiKlinik.User.RequiredRole;
+
 @Controller
 public class JadwalController {
 
@@ -22,6 +24,7 @@ public class JadwalController {
     private JadwalService jadwalService;
 
     @GetMapping("/jadwal")
+    @RequiredRole("pasien")
     public String halamanListJadwal(Model model) {
         List<Jadwal> jadwalList = jadwalService.getAllJadwal();
         List<Object[]> jadwalWithDates = jadwalList.stream().map(jadwal -> new Object[]{ jadwal, calculateDate(jadwal.getIdHari())}).collect(Collectors.toList());
@@ -34,6 +37,7 @@ public class JadwalController {
     }
 
     @GetMapping("/jadwal/filterSpecialis")
+    @RequiredRole("pasien")
     public String filterBySpecialis(@RequestParam("idSpecialis") int idSpecialis, Model model) {
     List<Jadwal> jadwalList = jadwalService.getJadwalBySpecialisId(idSpecialis);
     List<Object[]> jadwalWithDates = jadwalList.stream().map(jadwal -> new Object[]{ jadwal, DateUtilities.calculateDate(jadwal.getIdHari())}).collect(Collectors.toList());
@@ -46,6 +50,7 @@ public class JadwalController {
     }
 
     @GetMapping("/jadwal/filterDokter")
+    @RequiredRole("pasien")
     public String filterByDokter(@RequestParam("idDokter") int idDokter, Model model) {
     List<Jadwal> jadwalList = jadwalService.getJadwalByDokterId(idDokter);
     List<Object[]> jadwalWithDates = jadwalList.stream().map(jadwal -> new Object[]{jadwal, DateUtilities.calculateDate(jadwal.getIdHari())}).collect(Collectors.toList());

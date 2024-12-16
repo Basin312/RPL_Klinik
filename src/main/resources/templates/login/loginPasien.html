@@ -12,6 +12,9 @@
         <div id="bg">
             <h1 id = judul>Poliklinik Sehat Selalu</H1>
                 <form action="loginPasien" method="post">
+                    <div th:if="${error}">
+                        <p th:text="${error}">username or password incorrect</p>
+                    </div>
                     <div id="mail" class="input">
                         <label for="eemail">Email</label><br>
                         <input type="text" name="Email" id="eemail" placeholder="Masukan Email"><br>
@@ -22,8 +25,10 @@
                     </div>
                     
                     <button type="submit" >Sign in</button>
-
-
+                    <p id="pasien">Tidak punya akun? <a id="pasienlink" href="/register">Sign up</a></p>
+                </form>
+                <form action="/" method="get">
+                    <button type="submit">back</button>
                 </form>
         </div>
     </div>
