@@ -212,8 +212,12 @@ public class DokterController {
         }
     }
 
-    @GetMapping("/simpanKonsultasi")
-    public String simpanKonsultasi(){
+    @GetMapping("/simpanKonsultasi/{id_Pasien}")
+    public String simpanKonsultasi(@PathVariable("id_Pasien") int id_Pasien){
+        if(session.getAttribute("id_Konsul") == null){
+            return "redirect:/dokter/konsultasi/" + id_Pasien;
+        }
+        
         //set is_Konsul jadi true
         this.dokterService.setIsKonsul((int) session.getAttribute("id_Pendaftaran"));
 
