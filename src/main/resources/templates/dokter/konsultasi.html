@@ -15,7 +15,7 @@
                 </span>
             </a>
             Poliklinik Sehat Selalu
-            <a th:href="@{/dokter/logout}">
+            <a th:href="@{/dokter/logoutdokter}">
                 <span class="logout_icon">
                     <input type="image" src="/image/Icon Logout.png">
                 </span>
@@ -77,7 +77,7 @@
             </div>
     
             <div class="button_simpan">
-                <a th:href="@{/dokter/simpanKonsultasi}">
+                <a th:href="@{/dokter/simpanKonsultasi/{id_Pasien}(id_Pasien=${id_Pasien})}">
                     <button type="button">Simpan</button>
                 </a>
             </div>

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -193,33 +194,42 @@ public class DokterController {
         return "/dokter/rekamMedis";
     }
 
+    
     @GetMapping("/dokumenPendukung/{id_Dokumen}")
     @RequiredRole("dokter")
     public ResponseEntity<Resource> showDokumen(@PathVariable("id_Dokumen") int id_Dokumen){
         // Dapatkan path file dari database
+    public ResponseEntity<Resource> showDokumen(@PathVariable("id_Dokumen") int id_Dokumen) {
         Optional<DokumenPendukung> dokumen = dokterService.getDokumenById(id_Dokumen);
-        String filePath = dokumen.get().getFile_dokumen();
+        if (dokumen.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        String filePath = "static" + dokumen.get().getFile_dokumen();
 
         try {
-            // Akses file fisik
-            Path path = Paths.get(filePath);
-            Resource resource = new UrlResource(path.toUri());
-
+            // Load resource from classpath
+            ClassPathResource resource = new ClassPathResource(filePath);
             if (resource.exists() && resource.isReadable()) {
                 return ResponseEntity.ok()
-                        .contentType(MediaType.APPLICATION_PDF)
-                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + path.getFileName())
+                        .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resource.getFilename())
                         .body(resource);
             } else {
                 return ResponseEntity.notFound().build();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
     }
 
-    @GetMapping("/simpanKonsultasi")
-    public String simpanKonsultasi(){
+
+    @GetMapping("/simpanKonsultasi/{id_Pasien}")
+    public String simpanKonsultasi(@PathVariable("id_Pasien") int id_Pasien){
+        if(session.getAttribute("id_Konsul") == null){
+            return "redirect:/dokter/konsultasi/" + id_Pasien;
+        }
+        
         //set is_Konsul jadi true
         this.dokterService.setIsKonsul((int) session.getAttribute("id_Pendaftaran"));
 
@@ -232,7 +242,7 @@ public class DokterController {
         return "redirect:/dokter/home";
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/logoutdokter")
     public String logout(){
         session.invalidate();
 

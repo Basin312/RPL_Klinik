@@ -41,8 +41,8 @@ public class perawatController {
     private HttpSession session;
 
     // Static "dokumen" folder inside src/main/resources/static
-    private static final String UPLOAD_DIR = "src/main/resources/static/dokumen";
    
+    private static final String UPLOAD_DIR = "src/main/resources/static/dokumen";
     
     @GetMapping("/perawat")
     @RequiredRole("perawat")

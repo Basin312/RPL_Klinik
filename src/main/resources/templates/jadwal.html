@@ -116,8 +116,11 @@
                     <td th:text="${data[0].sisaSlot}"></td>
                     <td>
                         <!--wrap pake form-->
-                        <button class="btn-book" th:if="${data[0].sisaSlot > 0}">Booking</button>
-                        <button class="btn-book" th:if="${data[0].sisaSlot == 0}" disabled>Penuh</button>
+                        <form th:action="@{/jadwal/book}" method="post">
+                            <input type="hidden" name="idJadwal" th:value="${data[0].idJadwal}">
+                            <button class="btn-book" th:if="${data[0].sisaSlot > 0}" type="submit">Booking</button>
+                            <button class="btn-book" th:if="${data[0].sisaSlot == 0}" disabled>Penuh</button>
+                        </form>
                     </td>
                 </tr>
             </tbody>

@@ -73,7 +73,7 @@
                 
                     <div class="form-group">
                         <label for="harga">Biaya Konsultasi:</label>
-                        <span id="harga" th:text="${transaksi.harga != null ? #numbers.formatCurrency(transaksi.harga) : 'N/A'}">Default Harga</span>
+                        <span id="harga" th:text="${transaksi.harga != null ? 'Rp ' + transaksi.harga.toPlainString() : 'N/A'}">Default Harga</span>
                     </div>
                 
                     <div class="form-group">
