@@ -30,4 +30,8 @@ public class JadwalService {
     public List<Jadwal> getJadwalByDokterId(int idDokter) {
         return jadwalRepository.findByDokterId(idDokter);
     }
+
+    public void bookJadwal(int idJadwal, int idPasien) {
+        jadwalRepository.addBooking(idJadwal, idPasien);
+    }
 }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Jadwal {
+    private int idJadwal;
     private String namaDokter;
     private String namaSpecialis;
     private int idHari;

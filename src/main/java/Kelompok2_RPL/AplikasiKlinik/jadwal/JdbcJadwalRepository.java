@@ -35,6 +35,7 @@ public class JdbcJadwalRepository {
 
     public Jadwal mapToRowJadwal(ResultSet resultSet, int rowNumber) throws SQLException{
         return new Jadwal(
+            resultSet.getInt("id_jadwal"),
             resultSet.getString("nama"),
             resultSet.getString("nama_specialis"),
             resultSet.getInt("id_hari"),
@@ -104,5 +105,16 @@ public class JdbcJadwalRepository {
         "WHERE id_dokter = ?";
     
     return jdbcTemplate.query(sqlQuery, this::mapToRowJadwal, idDokter);
+    }
+
+    public void addBooking(int idJadwal, int idPasien) {
+        String getMaxNomorAntrian = "SELECT COALESCE(MAX(nomor_antrian), 0) + 1 FROM pendaftaran WHERE id_jadwal = ?";
+        int nextNomorAntrian = jdbcTemplate.queryForObject(getMaxNomorAntrian, new Object[]{idJadwal}, Integer.class);
+
+        String insertBookingQuery = "INSERT INTO pendaftaran (tanggal_pendaftaran, id_jadwal, id_pasien, is_daftar, nomor_antrian) VALUES (CURRENT_DATE, ?, ?, false, ?)";
+        jdbcTemplate.update(insertBookingQuery, idJadwal, idPasien, nextNomorAntrian);
+
+        String updateSisaSlotQuery = "UPDATE jadwal SET limit_pasien = limit_pasien - 1 WHERE id_jadwal = ? AND limit_pasien > 0";
+        jdbcTemplate.update(updateSisaSlotQuery, idJadwal);
     }
 }
