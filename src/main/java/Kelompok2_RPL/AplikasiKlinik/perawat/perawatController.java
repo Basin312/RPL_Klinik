@@ -139,10 +139,11 @@ public class perawatController {
             // System.out.println("call repository");
             
             //get id user
-            Login user = (Login)session.getAttribute("Email");
-            int id_Perawat = user.getId();
-            jdbcDokumen.addDokumenPendukung(filename, "/dokumen"+filename, LocalDate.now(), options, id_Perawat);
-            // jdbcDokumen.addDokumenPendukung(filename, "/dokumen/"+filename, LocalDate.now(), options, 1);
+            // Login user = (Login)session.getAttribute("Email");
+            // int id_Perawat = user.getId();
+            // jdbcDokumen.addDokumenPendukung(filename, "/dokumen"+filename, LocalDate.now(), options, id_Perawat);
+            jdbcDokumen.addDokumenPendukung(filename, "/dokumen/"+filename, LocalDate.now(), options, 1);
+            
             Pasien pasien = jdbc.findById(options).get();
             // Return success response including datalist input
             redirectAttributes.addFlashAttribute("success", "File uploaded successfully: " + filename);
