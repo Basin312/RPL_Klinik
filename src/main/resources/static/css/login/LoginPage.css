@@ -24,6 +24,7 @@ div#bg {
     width: 100%; 
     text-align: center;
     background-color: rgba(0, 0, 0, 0.4);
+    row-gap: 10px;
 }
 
 form {
@@ -60,4 +61,14 @@ h1{
 }
 label{
     color: white;
+}
+#pasien{
+    color:white;
+}
+#pasienlink:hover{
+    text-decoration: underline;
+}
+#pasienlink{
+    color: lightblue;
+    text-decoration: none;
 }

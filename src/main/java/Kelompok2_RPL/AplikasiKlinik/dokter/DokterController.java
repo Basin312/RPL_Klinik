@@ -27,6 +27,8 @@ import Kelompok2_RPL.AplikasiKlinik.checkup.Checkup;
 import Kelompok2_RPL.AplikasiKlinik.dokumen_pendukung.DokumenPendukung;
 import Kelompok2_RPL.AplikasiKlinik.konsultasi.Konsultasi;
 import Kelompok2_RPL.AplikasiKlinik.pasien.PasienDokter;
+import Kelompok2_RPL.AplikasiKlinik.User.RequiredRole;
+
 import Kelompok2_RPL.AplikasiKlinik.pendaftaran.PendaftaranKonsultasi;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -41,6 +43,7 @@ public class DokterController {
     private HttpSession session;
     
     @GetMapping("/home")
+    @RequiredRole("dokter")
     public String getIndex(Model model, @RequestParam(name = "filter", required = false) String filter){
         if(filter == null){ //ga pake filter
             List<PendaftaranKonsultasi> listAntrian = this.dokterService.getAllPendaftaran((int) session.getAttribute("id_Dokter"));
@@ -64,6 +67,7 @@ public class DokterController {
     }
 
     @GetMapping("/konsultasi/{id_Pasien}")
+    @RequiredRole("dokter")
     public String konsultasi(@PathVariable("id_Pasien") int id_Pasien, Model model, @RequestParam(name = "id_Pendaftaran", required = false) Integer id_Pendaftaran, Konsultasi konsultasi, CatatanObat catatanObat){
         //masukin id_Pendaftaran ke session saat akses pertama kali dari mencet button di home
         if(id_Pendaftaran != null){
@@ -157,6 +161,7 @@ public class DokterController {
     }
 
     @GetMapping("/rekamMedis/{id_Pasien}")
+    @RequiredRole("dokter")
     public String showRekamMedisPasien(@PathVariable("id_Pasien") int id_Pasien, Model model){
         //dapetin identitas_pasien
         Optional<PasienDokter> pasien = this.dokterService.getPasienById(id_Pasien);
@@ -191,6 +196,9 @@ public class DokterController {
 
     
     @GetMapping("/dokumenPendukung/{id_Dokumen}")
+    @RequiredRole("dokter")
+    public ResponseEntity<Resource> showDokumen(@PathVariable("id_Dokumen") int id_Dokumen){
+        // Dapatkan path file dari database
     public ResponseEntity<Resource> showDokumen(@PathVariable("id_Dokumen") int id_Dokumen) {
         Optional<DokumenPendukung> dokumen = dokterService.getDokumenById(id_Dokumen);
         if (dokumen.isEmpty()) {

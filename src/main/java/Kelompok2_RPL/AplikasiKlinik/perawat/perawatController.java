@@ -27,6 +27,8 @@ import Kelompok2_RPL.AplikasiKlinik.dokumen_pendukung.DokumenPendukungRepository
 import Kelompok2_RPL.AplikasiKlinik.pasien.Pasien;
 import jakarta.servlet.http.HttpSession;
 
+import Kelompok2_RPL.AplikasiKlinik.User.RequiredRole;
+
 @Controller
 public class perawatController {
     @Autowired
@@ -43,12 +45,14 @@ public class perawatController {
     private static final String UPLOAD_DIR = "src/main/resources/static/dokumen";
     
     @GetMapping("/perawat")
+    @RequiredRole("perawat")
     public String homePagePerawat(Model model){
         List<CheckUp> checkups = jdbc.findAll();
         List<Pasien> pasiens = jdbc.findPasiens();
         System.out.println( "data :"+checkups.isEmpty());
         model.addAttribute("rell", checkups);
         model.addAttribute("list", pasiens);
+    
         return "/perawat/antriancheckup";
     }
 
