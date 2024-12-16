@@ -94,5 +94,10 @@ public class LoginController {
         session.setAttribute("Email", user);
             return "redirect:/admin";   //edit loc
     }
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("username");
+        return "redirect:/";
+    }
 }
 
