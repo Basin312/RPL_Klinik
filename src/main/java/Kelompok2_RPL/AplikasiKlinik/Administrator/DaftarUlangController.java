@@ -60,10 +60,7 @@ public class DaftarUlangController {
         return "redirect:/administrator/daftarulang";
     }
 
-    @GetMapping("/logout")
-    public String logout(){
-        session.invalidate();
-
-        return "redirect:/loginAdministrator";
-    }
+   
+    
 }
+

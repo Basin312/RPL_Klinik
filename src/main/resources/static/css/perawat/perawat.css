@@ -232,7 +232,7 @@ background-color: #00A1FF;
     "judul"
     "form"
     "message";
-    grid-template-rows: 6rem 11rem 17rem;
+    grid-template-rows: 6rem 14rem 14rem;
 }
 
 .formUpload{

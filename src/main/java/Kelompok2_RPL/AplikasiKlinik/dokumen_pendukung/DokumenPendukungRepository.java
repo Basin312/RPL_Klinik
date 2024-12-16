@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface DokumenPendukungRepository {
     List<DokumenPendukung> getDokumenPendukungByPasien(int id_Pasien);
     Optional<DokumenPendukung> getDokumenById(int id_Dokumen);
-    void addDokumenPendukung(String namaDokumen, 
+    boolean addDokumenPendukung(String namaDokumen, 
     String pathDokumen, 
     LocalDate date, 
     int id_Pasien, 
