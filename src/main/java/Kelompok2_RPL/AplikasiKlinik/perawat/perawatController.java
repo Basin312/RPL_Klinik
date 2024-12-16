@@ -45,7 +45,7 @@ public class perawatController {
    
     
     @GetMapping("/perawat")
-  @RequiredRole("perawat")
+    @RequiredRole("perawat")
     public String homePagePerawat(Model model){
         List<CheckUp> checkups = jdbc.findAll();
         List<Pasien> pasiens = jdbc.findPasiens();

@@ -35,6 +35,7 @@ public class TransaksiController {
     }
 
     @GetMapping("/administrator/detailTransaksi")
+    @RequiredRole("administrator")
     public String detailTransaksi(@RequestParam("id") int idPasien, Model model) {
         DetailTransaksiDTO detailTransaksi = transaksiService.getDetailTransaksi(idPasien);
         model.addAttribute("transaksi", detailTransaksi);

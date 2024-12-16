@@ -1,15 +1,20 @@
 package Kelompok2_RPL.AplikasiKlinik;
 
+import java.lang.ProcessBuilder.Redirect;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import Kelompok2_RPL.AplikasiKlinik.User.LoginPage.Login;
 import Kelompok2_RPL.AplikasiKlinik.User.LoginPage.LoginService;
+import ch.qos.logback.core.model.Model;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -17,7 +22,9 @@ import jakarta.servlet.http.HttpSession;
 public class LoginController {
     @Autowired 
     private LoginService users;
-
+    
+    @Autowired
+    private HttpSession httpSession;
     
     @GetMapping("/")
     public String roleslogin(){
@@ -29,8 +36,9 @@ public class LoginController {
     }
 
     @PostMapping("/loginPasien")
-    public String LoginPasien(@RequestParam String Email, @RequestParam String password, HttpSession session){
+    public String LoginPasien(@RequestParam String Email, @RequestParam String password, HttpSession session, RedirectAttributes redirectAttributes){
         Login user = users.loginPasien(Email, password);
+        redirectAttributes.addFlashAttribute("error", "password salah atau email tidak terdaftar");
         if(user==null){
             return "redirect:/loginPasien";
         }
@@ -44,15 +52,15 @@ public class LoginController {
     }
 
     @PostMapping("/loginDokter")
-    public String loginDokter(@RequestParam String Email, @RequestParam String password, HttpSession session){
+    public String loginDokter(@RequestParam String Email, @RequestParam String password, HttpSession session, RedirectAttributes redirectAttributes){
         Login user = users.loginDokter(Email, password);
         if(user==null){
-            return "redirect:/LoginDokter";
+            redirectAttributes.addFlashAttribute("error", "password salah atau email tidak terdaftar");
+            return "redirect:/loginDokter";
         }
 
         session.setAttribute("User", user);
             return "redirect:/dokter/home";   //edit loc
-
     }
 
     @GetMapping("/loginPerawat")
@@ -60,22 +68,24 @@ public class LoginController {
         return "/login/LoginPerawat";
     }
     @PostMapping("/loginPerawat")
-    public String loginPerawat(@RequestParam String Email, @RequestParam String password, HttpSession session){
+    public String loginPerawat(@RequestParam String Email, @RequestParam String password, HttpSession session, RedirectAttributes redirectAttributes){
         Login user = users.loginPerawat(Email, password);
+        redirectAttributes.addFlashAttribute("error", "password salah atau email tidak terdaftar");
         if(user==null){
             return "redirect:/loginPerawat";
         }
         session.setAttribute("User", user);
         
-            return "redirect:/perawat";   //edit loc
+        return "redirect:/perawat";   //edit loc
     }
     @GetMapping("/loginAdministrator")
     public String loginAdministrator(){
         return "/login/LoginAdministrator";
     }
     @PostMapping("/loginAdministrator")
-    public String loginAdministrator(@RequestParam String Email, @RequestParam String password, HttpSession session){
+    public String loginAdministrator(@RequestParam String Email, @RequestParam String password, HttpSession session, RedirectAttributes redirectAttributes){
         Login user = users.loginAdministrator(Email, password);
+        redirectAttributes.addFlashAttribute("error", "password salah atau email tidak terdaftar");
         if(user==null){
             return "redirect:/loginAdministrator";
         }
@@ -96,10 +106,10 @@ public class LoginController {
         session.setAttribute("Email", user);
             return "redirect:/admin";   //edit loc
     }
-
+    
     @GetMapping("/logout")
-    public String logout(HttpSession session){
-        session.removeAttribute("username");
+    public String logout(){
+        httpSession.removeAttribute("User");
         return "redirect:/";
     }
 
