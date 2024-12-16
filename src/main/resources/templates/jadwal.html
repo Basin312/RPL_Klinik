@@ -80,7 +80,7 @@
                     <option th:each="dokter : ${dokterList}" th:value="${dokter.id}" th:text="${dokter.nama}"></option>
                 </select>
             </div>
-            <button type="submit">Search</button>
+            <button class="btn-book" type="submit">Search</button>
         </form>
 
         <form action="/jadwal/filterSpecialis" method="get">
@@ -91,7 +91,7 @@
                     <option th:each="specialis : ${specialisList}" th:value="${specialis.id}" th:text="${specialis.nama}"></option>
                 </select>
             </div>
-            <button type="submit">Search</button>
+            <button class="btn-book" type="submit">Search</button>
         </form>
 
 
@@ -104,22 +104,20 @@
                     <th>Tanggal</th>
                     <th>Jam</th>
                     <th>Sisa Slot</th>
-                    <th>Aksi</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="jadwal : ${jadwalList}">
-                    <td th:text="${jadwal.namaDokter}"></td>
-                    <td th:text="${jadwal.namaSpecialis}"></td>
-                    <td th:text="${jadwal.hari}"></td>
-                    <!--hari ganti jadi tanggal Hari DAN tanggal
-                        ngikut sistem, misal hari sensin mau book jumat, same week.
-                        hari rabu book senin, next week-->
-                    <td th:text="${jadwal.jam}"></td>
-                    <td th:text="${jadwal.sisaSlot}"></td>
+                <tr th:each="data : ${jadwalWithDates}">
+                    <td th:text="${data[0].namaDokter}"></td>
+                    <td th:text="${data[0].namaSpecialis}"></td>
+                    <td th:text="${#temporals.format(data[1], 'EEEE, yyyy-MM-dd')}"></td>
+                    <td th:text="${data[0].jam}"></td>
+                    <td th:text="${data[0].sisaSlot}"></td>
                     <td>
-                        <button class="btn-book" th:if="${jadwal.sisaSlot > 0}">Booking</button>
-                        <button class="btn-book" th:if="${jadwal.sisaSlot == 0}" disabled>Penuh</button>
+                        <!--wrap pake form-->
+                        <button class="btn-book" th:if="${data[0].sisaSlot > 0}">Booking</button>
+                        <button class="btn-book" th:if="${data[0].sisaSlot == 0}" disabled>Penuh</button>
                     </td>
                 </tr>
             </tbody>
