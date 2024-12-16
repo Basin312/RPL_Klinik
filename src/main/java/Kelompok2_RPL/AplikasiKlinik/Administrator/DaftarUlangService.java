@@ -26,12 +26,16 @@ public class DaftarUlangService {
 
     public void updatePasienStatus(int idPasien, String status) {
         DetailPasienDTO detail = daftarUlangRepository.findDetailPasienById(idPasien);
-
+    
         if (detail.isReadOnly()) {
             throw new UnsupportedOperationException("Daftar ulang ini sudah selesai dan tidak dapat diubah lagi.");
         }
-
+    
         boolean is_daftar = status.equalsIgnoreCase("Selesai");
-        daftarUlangRepository.updateIsDaftarByIdPasien(idPasien, is_daftar);
+        if (is_daftar) {
+            daftarUlangRepository.updateDaftarUlangWithAntrian(idPasien, detail.getIdJadwal()); // Pastikan ada `idJadwal` di DetailPasienDTO
+        } else {
+            daftarUlangRepository.updateIsDaftarByIdPasien(idPasien, false);
+        }
     }
 }
