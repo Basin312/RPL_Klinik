@@ -17,7 +17,7 @@
                         </span>
                     </a>
                     Poliklinik Sehat Selalu
-                    <a th:href="@{/dokter/logoutdokter}">
+                    <a th:href="@{/logout}">
                         <span class="logout_icon">
                             <input type="image" src="/image/Icon Logout.png">
                         </span>
@@ -60,20 +60,5 @@
             </div>
         </div>
     </div>
-
-    <!-- <script defer>
-        (function (){
-            var buttons = document.getElementsByClassName("konsul_button")
-            
-            // Loop untuk menonaktifkan tombol di baris selain baris pertama
-            for (var i = 0; i < buttons.length; i++) {
-                if (i === 0) { // Jika baris bukan baris pertama
-                    buttons[i].disabled = false; // Nonaktifkan tombol
-                }else{
-                    buttons[i].disabled = true;
-                }
-            }
-        })();
-    </script> -->
 </body>
 </html>

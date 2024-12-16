@@ -59,8 +59,4 @@ public class DaftarUlangController {
         daftarUlangService.updatePasienStatus(id, status);
         return "redirect:/administrator/daftarulang";
     }
-
-   
-    
 }
-

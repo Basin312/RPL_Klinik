@@ -1,15 +1,11 @@
 package Kelompok2_RPL.AplikasiKlinik.dokter;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -238,13 +234,6 @@ public class DokterController {
 
 
         return "redirect:/dokter/home";
-    }
-
-    @GetMapping("/logoutdokter")
-    public String logout(){
-        session.invalidate();
-
-        return "redirect:/loginDokter";
     }
 }
 
