@@ -27,7 +27,7 @@ public class PasienController {
         return "pasien";
     }
     
-    @GetMapping("/logout")
+    @GetMapping("/logoutpasien")
         public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/loginPasien";
