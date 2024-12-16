@@ -7,4 +7,5 @@ public interface DaftarUlangRepository {
     List<PasienStatusDTO> findByName(String keyword);
     DetailPasienDTO findDetailPasienById(int id);
     void updateIsDaftarByIdPasien(int idPasien, boolean is_daftar);
+    void updateDaftarUlangWithAntrian(int idPasien, int idJadwal);
 }
