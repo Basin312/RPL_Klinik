@@ -51,7 +51,7 @@ public class LoginController {
         }
         session.setAttribute("Email", user);
         session.setAttribute("id_Dokter", user.getId());
-            return "redirect:/dokter";   //edit loc
+            return "redirect:/dokter/home";   //edit loc
     }
 
     @GetMapping("/loginPerawat")
