@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import Kelompok2_RPL.AplikasiKlinik.User.LoginPage.Login;
-import Kelompok2_RPL.AplikasiKlinik.dokumen_pendukung.DokumenPendukung;
+
 import Kelompok2_RPL.AplikasiKlinik.dokumen_pendukung.DokumenPendukungRepository;
 import Kelompok2_RPL.AplikasiKlinik.pasien.Pasien;
 import jakarta.servlet.http.HttpSession;
@@ -69,6 +69,7 @@ public class perawatController {
     // }
     
     @PostMapping("/checkup")
+    @RequiredRole("perawat")
     public String halamanCheckup(@RequestParam(required = true) Integer id, @RequestParam(required = true) String date, Model model) {
         Optional<Pasien> result = jdbc.findById(id);
         if (result.isPresent()) {
@@ -113,13 +114,16 @@ public class perawatController {
 
         // Check if the file is empty
         if(file.isEmpty() && options==null){
-            redirectAttributes.addFlashAttribute("error", "belum ada data yang  dimasukan");
+            redirectAttributes.addFlashAttribute("errorUpload", "belum ada data yang  dimasukan");
             return "redirect:/perawat";
         }else if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "ga ada file yang akan uploaded. Silahkan masukan file.");
+            redirectAttributes.addFlashAttribute("errorUpload", "ga ada file yang akan uploaded. Silahkan masukan file.");
             return "redirect:/perawat";  // Redirect to the page with the form
         }else if(options == null){
-            redirectAttributes.addFlashAttribute("error", "ga ada data pasien untuk dimasukan");
+            redirectAttributes.addFlashAttribute("errorUpload", "ga ada data pasien untuk dimasukan");
+            return "redirect:/perawat";
+        }else if(nama.isEmpty()){
+            redirectAttributes.addFlashAttribute("errorUpload", "belom masukan nama file");
             return "redirect:/perawat";
         }
 
@@ -144,15 +148,20 @@ public class perawatController {
             // System.out.println("call repository");
             
             //get id user
-            Login user = (Login)session.getAttribute("Email");
+            Login user = (Login)session.getAttribute("User");
             int id_Perawat = user.getId();
             // jdbcDokumen.addDokumenPendukung(filename, "/dokumen"+filename, LocalDate.now(), options, id_Perawat);
-            jdbcDokumen.addDokumenPendukung(nama, "/dokumen/"+filename, LocalDate.now(), options, id_Perawat);
-            
-            Pasien pasien = jdbc.findById(options).get();
+            if(jdbcDokumen.addDokumenPendukung(nama, "/dokumen/"+filename, LocalDate.now(), options, id_Perawat)){
+                Pasien pasien = jdbc.findById(options).get();
             // Return success response including datalist input
-            redirectAttributes.addFlashAttribute("success", "File uploaded successfully: " + filename);
+            redirectAttributes.addFlashAttribute("success", "File uploaded successfully: " + nama);
             redirectAttributes.addFlashAttribute("selectedOption", pasien.getNama()); // Passing selected option to be displayed
+            }else{
+                redirectAttributes.addFlashAttribute("errorUpload", "gagal upload");
+                return "redirect:/perawat";
+            }
+            
+            
 
         } catch (IOException e) {
             // Return error response if file upload fails

@@ -74,7 +74,7 @@ public class JadwalController {
 
     @PostMapping("/jadwal/book")
     public String bookJadwal(@RequestParam("idJadwal") int idJadwal, HttpSession session, RedirectAttributes redirectAttributes) {
-        Login user = (Login) session.getAttribute("Email");
+        Login user = (Login) session.getAttribute("User");
         if (user == null) {
             return "redirect:/loginPasien";
         }

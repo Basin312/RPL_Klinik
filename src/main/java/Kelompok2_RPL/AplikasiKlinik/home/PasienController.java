@@ -1,5 +1,7 @@
 package Kelompok2_RPL.AplikasiKlinik.home;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,19 +15,18 @@ import jakarta.servlet.http.HttpSession;
 public class PasienController {
 
     @Autowired
-    private HomeService homeService;
+    private HomeRepository homeRepository;
+
+    @Autowired
+    private HttpSession session;
 
     @GetMapping("/pasien")
     @RequiredRole("pasien")
     public String halamanPasien(HttpSession session, Model model) {
-        Login user = (Login) session.getAttribute("Email");
-        if (user == null) {
-            return "redirect:/loginPasien";
-        }
+        Login user = (Login)session.getAttribute("User");
+        List<Home> data= homeRepository.listPendaftaran(user.getId());
 
-        int idPasien = user.getId();
-        Home home = homeService.getNomorAntrian(idPasien);
-        model.addAttribute("home", home);
+        model.addAttribute("row", data);
         return "pasien";
     }
     

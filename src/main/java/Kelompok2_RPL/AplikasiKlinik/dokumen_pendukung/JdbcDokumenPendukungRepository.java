@@ -52,16 +52,20 @@ public class JdbcDokumenPendukungRepository implements DokumenPendukungRepositor
     }
 
     @Override
-    public void addDokumenPendukung(String namaDokumen, String pathDokumen, LocalDate date, int id_Pasien,
+    public boolean addDokumenPendukung(String namaDokumen, String pathDokumen, LocalDate date, int id_Pasien,
             int id_Perawat) {
             String sql = "INSERT INTO dokumenpendukung (nama_dokumen, file_dokumen, tanggal, id_Pasien, id_Perawat) VALUES (?, ?, ?, ?, ?)";
 
         try{
             jdbcTemplate.update(sql, namaDokumen, pathDokumen, date, id_Pasien, id_Perawat);
+            return true;
         }catch(Exception e){
             System.out.println("gagal Upload");
             e.printStackTrace();
+            return false;
         }
+
+        
     }
 
     

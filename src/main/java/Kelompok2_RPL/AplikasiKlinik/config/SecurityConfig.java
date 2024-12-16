@@ -1,4 +1,4 @@
-package Kelompok2_RPL.AplikasiKlinik.Config;
+package Kelompok2_RPL.AplikasiKlinik.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
