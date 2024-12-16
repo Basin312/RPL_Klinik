@@ -26,6 +26,8 @@ import Kelompok2_RPL.AplikasiKlinik.checkup.Checkup;
 import Kelompok2_RPL.AplikasiKlinik.dokumen_pendukung.DokumenPendukung;
 import Kelompok2_RPL.AplikasiKlinik.konsultasi.Konsultasi;
 import Kelompok2_RPL.AplikasiKlinik.pasien.PasienDokter;
+import Kelompok2_RPL.AplikasiKlinik.User.RequiredRole;
+
 import Kelompok2_RPL.AplikasiKlinik.pendaftaran.PendaftaranKonsultasi;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -40,6 +42,7 @@ public class DokterController {
     private HttpSession session;
     
     @GetMapping("/home")
+    @RequiredRole("dokter")
     public String getIndex(Model model, @RequestParam(name = "filter", required = false) String filter){
         if(filter == null){ //ga pake filter
             List<PendaftaranKonsultasi> listAntrian = this.dokterService.getAllPendaftaran((int) session.getAttribute("id_Dokter"));

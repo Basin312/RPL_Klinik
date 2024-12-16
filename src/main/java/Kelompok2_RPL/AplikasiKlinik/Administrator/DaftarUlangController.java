@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import Kelompok2_RPL.AplikasiKlinik.User.RequiredRole;
+
 
 @Controller
 public class DaftarUlangController {
@@ -16,6 +18,7 @@ public class DaftarUlangController {
     @Autowired
     private DaftarUlangService daftarUlangService;
 
+    @RequiredRole("administrator")
     @GetMapping("/administrator/daftarulang")
     public String daftarUlang(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
         List<PasienStatusDTO> pasienList;
@@ -33,6 +36,7 @@ public class DaftarUlangController {
     }
 
     @GetMapping("/administrator/detailPasien")
+    @RequiredRole("administrator")
     public String detailPasien(@RequestParam("id") int id, Model model) {
         DetailPasienDTO detailPasien = daftarUlangService.getDetailPasienById(id);
         model.addAttribute("pasien", detailPasien);
